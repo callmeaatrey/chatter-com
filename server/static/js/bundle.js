@@ -1,0 +1,1 @@
+console.error("Error: Cannot find module '/Users/aatrey/Desktop/Assignment - Interview/chatter-com/src/client/app-client.js' from '/Users/aatrey/Desktop/Assignment - Interview/chatter-com'");
