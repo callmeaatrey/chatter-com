@@ -1,11 +1,12 @@
 // Landing Presentation Component
 
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Landing extends Component {
 	render() {
 		return (
-			<div className="landing">Landing</div>
+			<RaisedButton label="Default" />
 		);
 	}
 }
