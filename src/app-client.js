@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import makeRoutes from './routes';
 
-import Routes from './routes';
+import App from './containers/App.container';
 
-// Needed for onTouchTap
-injectTapEventPlugin();
+const routes = makeRoutes();
 
 ReactDOM.render(
-	<MuiThemeProvider>
-		<Routes history={browserHistory} />
-	</MuiThemeProvider>,
+	<App history={browserHistory}
+		routes={routes} />,
 	document.getElementById('main')
 );

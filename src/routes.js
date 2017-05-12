@@ -1,14 +1,16 @@
 import React from 'react';
-import { Router, Route } from 'react-router';
+import {browserHistory, Router, Route, Redirect} from 'react-router';
 
-import Landing from './components/Landing.component';
-import NotFound from './components/NotFound.component';
+import makeMainRoutes from './components/routes';
 
-const Routes = (props) => (
-	<Router {...props}>
-		<Route path="/" component={Landing}/>
-		<Route path="*" component={NotFound}/>
-	</Router>
-);
+export const makeRoutes = () => {
+  const main = makeMainRoutes();
 
-export default Routes;
+  return (
+    <Route path=''>
+      {main}
+    </Route>
+  )
+}
+
+export default makeRoutes
