@@ -1,0 +1,96 @@
+/*
+* Stylesheet for ChatterCom
+* Written By: Shikher Aatrey
+*/
+
+/*
+* Table of Contents
+* 1. Skeleton (16)
+* 2. Login (24)
+* 3. Social Button (63)
+* 3. Home (76)
+* 4. Profile (80)
+* 5. Media Queries (84)
+ */
+
+/* Skeleton */
+
+.skeleton {
+
+}
+
+/* </Skeleton> */
+
+/* <Login> */
+
+.layout,
+.login-wrapper {
+	min-height: 100vh;
+}
+
+.layout {
+	background-image:
+		url('https://raw.githubusercontent.com/callmeaatrey/totally-materialize/master/static/images/homeBack.jpg');
+}
+
+.login-form-button,
+.login-form {
+	width: 100%;
+}
+
+.login-form-forgot {
+	float: right;
+}
+
+.login-main {
+	padding-top: 10%;
+}
+
+.login-left {
+    border-right: 1px solid lightgrey;
+}
+
+.menu-header {
+	font-weight: 900;
+}
+
+.info-paragraph {
+	margin-top: 3%;
+}
+
+/* </Login> */
+
+/* <Social Button> */
+
+button.ant-btn.ant-btn-danger.ant-btn-lg {
+	width: 100%;
+	color: white;
+	background-color: #df4930;
+    width: 100%;
+    padding: 0.9em 1em 1em 1.3em;
+    height: auto;
+}
+
+/* </Social Buttons> */
+
+/* <Home> */
+
+/* </Home> */
+
+/* <Profile> */
+
+/* </Profile> */
+
+/* <Media queries> */
+
+/* For 'sm' and 'xs' resolutions */
+@media screen and (max-width:991px){
+    .login-left {
+    	border-right: none;
+    	padding-bottom: 1em;
+    	margin-bottom: 1em;
+    	border-bottom: 1px solid lightgrey;
+    }
+}
+
+/* </Media Queries> */

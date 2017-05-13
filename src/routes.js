@@ -1,3 +1,5 @@
+// src/routes.js
+
 import React from 'react';
 import {browserHistory, Router, Route, Redirect} from 'react-router';
 
