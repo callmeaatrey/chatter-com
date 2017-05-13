@@ -75,6 +75,60 @@ button.ant-btn.ant-btn-danger.ant-btn-lg {
 
 /* <Home> */
 
+.home-main {
+	min-height: 100vh;
+}
+
+.loader-active {
+	background-color: lightgrey;
+	filter: blur(10px);
+}
+
+.intro-loader {
+	position: absolute;
+	top: 50%;
+	left: 48%;
+	z-index: 1;
+}
+
+.load-line {
+	animation: expand 1s ease-in-out infinite;
+	border-radius: 10px;
+	display: inline-block;
+	transform-origin: center center;
+	margin: 0 3px;
+	width: 1px;
+	height: 25px;
+}
+
+.load-line:nth-child(1) {
+	background: #27ae60;
+}
+
+.load-line:nth-child(2) {
+	animation-delay: 180ms;
+	background: #f1c40f;
+}
+
+.load-line:nth-child(3) {
+	animation-delay: 360ms;
+	background: #e67e22;
+}
+
+.load-line:nth-child(4) {
+	animation-delay: 540ms;
+	background: #2980b9;
+}
+
+@keyframes expand {
+	0% {
+		transform: scale(1);
+	}
+	25% {
+		transform: scale(2);
+  	}
+}
+
 /* </Home> */
 
 /* <Profile> */
@@ -94,3 +148,4 @@ button.ant-btn.ant-btn-danger.ant-btn-lg {
 }
 
 /* </Media Queries> */
+

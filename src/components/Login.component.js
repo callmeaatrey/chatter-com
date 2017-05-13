@@ -37,7 +37,7 @@ class Login extends Component {
 												size="large"
 												onClick={this.props.auth.login.bind(this)}
 											>Signin With Google</Button>
-											<p className="info-paragraph"><a href="">Continue With Email</a>.
+											<p className="info-paragraph">
 												By signing up you indicate that you have read and agree to the Terms of Service and Privacy Policy.
 											</p>
 										</div>
