@@ -31,7 +31,6 @@ class AuthService extends EventEmitter {
 	    	if (error) {
 	    		console.log('Error loading the profile', error);
 	    	} else {
-	    		console.log(profile);
 	    		this.setProfile(profile);
 	    	}
 	    })

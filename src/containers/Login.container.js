@@ -3,14 +3,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
+import AuthService from '../utils/AuthService.util';
 
 // bringing in the presentation component
 import Login from '../components/Login.component';
 
 class LoginContainer extends Component {
 	render() {
+		var { auth, app } = this.props;
 		return (
-			<Login />
+			<Login
+				login={auth.login.bind(this)}/>
 		);
 	}
 }

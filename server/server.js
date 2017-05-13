@@ -32,7 +32,7 @@ db.once('open', function() {
 
 // Index route
 app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'static', 'index.html'));
+	res.sendFile(path.resolve(__dirname, 'static', 'index.html'));
 });
 
 // Firing up the server

@@ -35,7 +35,7 @@ class Login extends Component {
 												type="danger"
 												icon="plus-circle"
 												size="large"
-												onClick={this.props.auth.login.bind(this)}
+												onClick={this.props.login.bind(this)}
 											>Signin With Google</Button>
 											<p className="info-paragraph">
 												By signing up you indicate that you have read and agree to the Terms of Service and Privacy Policy.
