@@ -19,12 +19,19 @@ const requireAuth = (nextState, replace) => {
 	}
 };
 
+// to redirect if already logged in
+const checkLogin = (nextState, replace) => {
+	if(auth.loggedIn()) {
+		replace({ pathname: '/home'})
+	}
+};
+
 // router chart
 const Routes = () => (
 	<Route path="/" component={Skeleton} auth={auth}>
 		<IndexRedirect to="/home" />
 		<Route path="home" component={Home} onEnter={requireAuth} />
-		<Route path="login" component={Login} />
+		<Route path="login" component={Login} onEnter={checkLogin}/>
 		<Route path="*" component={NotFound} />
 	</Route>
 );
