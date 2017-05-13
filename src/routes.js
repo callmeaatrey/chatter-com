@@ -2,11 +2,12 @@
 
 import React from 'react';
 import {browserHistory, Router, Route, Redirect} from 'react-router';
+import store from './store';
 
 import makeMainRoutes from './components/routes';
 
 export const makeRoutes = () => {
-  const main = makeMainRoutes();
+  const main = makeMainRoutes(store);
 
   return (
     <Route path=''>
@@ -15,4 +16,4 @@ export const makeRoutes = () => {
   )
 }
 
-export default makeRoutes
+export default makeRoutes;

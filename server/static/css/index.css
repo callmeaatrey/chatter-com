@@ -30,7 +30,7 @@
 
 .layout {
 	background-image:
-		url('https://raw.githubusercontent.com/callmeaatrey/totally-materialize/master/static/images/homeBack.jpg');
+		url('../img/background_intro.jpg');
 }
 
 .login-form-button,
