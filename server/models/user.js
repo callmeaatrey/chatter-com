@@ -1,7 +1,7 @@
-import mongoose, { Schema } from 'mongoose';
+var mongoose = require('mongoose');
 
 // Defining User Schema
-var UserSchema = new Schema({
+var UserSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		unique: true
@@ -28,4 +28,4 @@ var UserSchema = new Schema({
 });
 
 // Export User Model
-export default mongoose.model('User', UserSchema);
+module.exports = User = mongoose.model('User', UserSchema);

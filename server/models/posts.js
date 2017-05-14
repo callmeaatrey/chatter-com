@@ -1,7 +1,7 @@
-import mongoose, { Schema } from 'mongoose';
+var mongoose = require('mongoose');
 
 // Defining Post Schema
-var PostSchema = new Schema({
+var PostSchema = new mongoose.Schema({
 	handle: String,
 	body: String,
 	date: {
@@ -11,4 +11,4 @@ var PostSchema = new Schema({
 });
 
 // Export Post Model
-export default mongoose.model('Post', PostSchema);
+module.exports = Post = mongoose.model('Post', PostSchema);
