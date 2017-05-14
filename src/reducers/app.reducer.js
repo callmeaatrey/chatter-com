@@ -9,7 +9,7 @@ const initialAppState = {
 
 const appReducer = function(state=initialAppState, action) {
 	switch(action.type) {
-		case types.LOADER_TOGGLE:
+		case types.LOGIN:
 			return Object.assign({}, state, {
 				loader: !state.loader
 			});

@@ -9,10 +9,12 @@ var UserSchema = new mongoose.Schema({
 
 	name: String,
 
-	handle: {
+	nickname: {
 		type: String,
 		unique: true
 	},
+
+	picture: String,
 
 	password: String,
 

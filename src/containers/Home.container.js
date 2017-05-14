@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
 import { loaderToggle } from '../actions/app.actions';
-import { profileCheck } from '../apis/user.api';
+import { readProfileViaGoogle } from '../apis/user.api';
 
 // bringing in the presentation component
 import Home from '../components/Home.component';
@@ -16,18 +16,17 @@ class HomeContainer extends Component {
 
     	// called when emitted
     	props.auth.on('profile_incoming', (profile) => {
-    		console.log('123');
-    		profileCheck(profile);
+    		readProfileViaGoogle(profile);
     	});
  	}
 
  	// lifecycle methods
  	componentDidMount() {
- 		profileCheck(this.props.auth.getProfile());
+ 		readProfileViaGoogle(this.props.auth.getProfile());
  	}
 
 	render() {
-		var { app } = this.props;
+		var { app, user } = this.props;
 		return (
 			<Home
 				loader={app.loader}
@@ -39,7 +38,8 @@ class HomeContainer extends Component {
 // to isolate which parts of the state this component need as it's props
 const mapStateToProps = (store) => {
 	return {
-		app: store.appState
+		app: store.appState,
+		user: store.userState
 	}
 };
 

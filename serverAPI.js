@@ -64,11 +64,14 @@ router.route('/register/google')
 		var user = new User();
 		user.email = req.body.email;
 		user.name = req.body.name;
+		user.nickname = req.body.nickname;
+		user.picture = req.body.picture;
 
 		user.save(function(err) {
 			if(err) {
 				res.send(err);
 			} else {
+				console.log(res);
 				res.json({ message: 'User successfully added!' });
 			}
 		});
