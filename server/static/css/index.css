@@ -23,12 +23,12 @@
 
 /* <Login> */
 
-.layout,
+.login-layout,
 .login-wrapper {
 	min-height: 100vh;
 }
 
-.layout {
+.login-layout {
 	background-image:
 		url('../img/background_intro.jpg');
 }
@@ -58,76 +58,85 @@
 	margin-top: 3%;
 }
 
+	/* <Social Button> */
+
+	button.ant-btn.ant-btn-danger.ant-btn-lg {
+		width: 100%;
+		color: white;
+		background-color: #df4930;
+	    width: 100%;
+	    padding: 0.9em 1em 1em 1.3em;
+	    height: auto;
+	}
+
+	/* </Social Buttons> */
+
 /* </Login> */
-
-/* <Social Button> */
-
-button.ant-btn.ant-btn-danger.ant-btn-lg {
-	width: 100%;
-	color: white;
-	background-color: #df4930;
-    width: 100%;
-    padding: 0.9em 1em 1em 1.3em;
-    height: auto;
-}
-
-/* </Social Buttons> */
 
 /* <Home> */
 
-.home-main {
+.home-layout,
+.home-wrapper {
 	min-height: 100vh;
 }
 
-.loader-active {
-	background-color: lightgrey;
-	filter: blur(10px);
+.fixed-sider {
+    position: fixed;
+    width: 14%;
 }
 
-.intro-loader {
-	position: absolute;
-	top: 50%;
-	left: 48%;
-	z-index: 1;
-}
-
-.load-line {
-	animation: expand 1s ease-in-out infinite;
-	border-radius: 10px;
-	display: inline-block;
-	transform-origin: center center;
-	margin: 0 3px;
-	width: 1px;
-	height: 25px;
-}
-
-.load-line:nth-child(1) {
-	background: #27ae60;
-}
-
-.load-line:nth-child(2) {
-	animation-delay: 180ms;
-	background: #f1c40f;
-}
-
-.load-line:nth-child(3) {
-	animation-delay: 360ms;
-	background: #e67e22;
-}
-
-.load-line:nth-child(4) {
-	animation-delay: 540ms;
-	background: #2980b9;
-}
-
-@keyframes expand {
-	0% {
-		transform: scale(1);
+	/* <Loader> */
+	.loader-active {
+		background-color: lightgrey;
+		filter: blur(10px);
 	}
-	25% {
-		transform: scale(2);
-  	}
-}
+
+	.intro-loader {
+		position: absolute;
+		top: 50%;
+		left: 48%;
+		z-index: 1;
+	}
+
+	.load-line {
+		animation: expand 1s ease-in-out infinite;
+		border-radius: 10px;
+		display: inline-block;
+		transform-origin: center center;
+		margin: 0 3px;
+		width: 1px;
+		height: 25px;
+	}
+
+	.load-line:nth-child(1) {
+		background: #27ae60;
+	}
+
+	.load-line:nth-child(2) {
+		animation-delay: 180ms;
+		background: #f1c40f;
+	}
+
+	.load-line:nth-child(3) {
+		animation-delay: 360ms;
+		background: #e67e22;
+	}
+
+	.load-line:nth-child(4) {
+		animation-delay: 540ms;
+		background: #2980b9;
+	}
+
+	@keyframes expand {
+		0% {
+			transform: scale(1);
+		}
+		25% {
+			transform: scale(2);
+	  	}
+	}
+
+	/* </Loader> */
 
 /* </Home> */
 
