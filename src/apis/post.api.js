@@ -11,6 +11,7 @@ export function createPost(postData, profile) {
 	// handling requests for creating new profile
 	axios.post('http://localhost:5100/api/post/new', {profile: profile, data: postData})
 		.then(res => {
+			console.log(res.data);
 			getSinglePost(res.data._id);
 		})
 		.catch(err => {
@@ -23,7 +24,7 @@ export function createPost(postData, profile) {
 export function getOwnPosts(email) {
 
 	// handling requests for fetching user's own posts
-	axios.get(`http://localhost:5100/api/post/own/${email}`)
+	axios.get(`http://localhost:5100/api/find/post/all`)
 		.then(res => {
 			store.dispatch(setOwnPosts(res.data));
 		})

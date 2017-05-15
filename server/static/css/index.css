@@ -157,6 +157,51 @@
 
 	/* </Editor> */
 
+	/* <Search> */
+
+	.img-circle-md {
+		border-radius: 50%;
+		height: 31px;
+    	width: 31px;
+	}
+
+	.img-circle-sm {
+		border-radius: 50%;
+    	height: 24px;
+		position: relative;
+		top: 7px;
+		margin-right: 12px;
+	}
+
+	.img-circle-lg {
+		position: relative;
+		top: 1.2em;
+		border-radius: 50%;
+	}
+
+	.search-user-name {
+		font-weight: 700;
+	}
+
+	.search-user-nickname {
+		float: left;
+	}
+
+	/* </Search> */
+
+	/* <Post> */
+
+	.post-body {
+		word-break: break-word;
+		font-size: 14px;
+	}
+
+	.post-head-title {
+		font-weight: normal;
+	}
+
+	/* </Post> */
+
 /* </Home> */
 
 /* <Profile> */

@@ -1,12 +1,13 @@
 // Home Presentation Component
 
 import React, { Component } from 'react';
-import { Layout, Menu, Breadcrumb, Dropdown, Icon, BackTop, Card } from 'antd';
+import { Layout, Menu, Dropdown, Icon, BackTop, Card } from 'antd';
+import { Link } from 'react-router';
 import Loader from './Loader.component';
-import Search from './Search.component';
 import AuthService from '../utils/AuthService.util';
 import Editor from './Editor.component';
 import TimeSince from '../utils/TimeSince.util';
+import Navbar from './Navbar.component';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -22,18 +23,6 @@ class Home extends Component {
 	}
 
 	render() {
-		const dropdownMenu = (
-			<Menu>
-				<Menu.Item key="1">Profile</Menu.Item>
-				<Menu.Item key="2">My Posts</Menu.Item>
-				<Menu.Divider />
-				<Menu.Item key="3">
-					<a href="" onClick={this.props.logout}>
-						Not you? Logout
-					</a>
-				</Menu.Item>
-			</Menu>
-		);
 
 		return (
 			<div className="home-wrapper">
@@ -41,40 +30,11 @@ class Home extends Component {
 				<div className="home-main"
 					style={ (!this.props.loader) ? {display: "inline"}  : {display: "none"}}>
 					<Layout className="home-layout">
-    					<Header style={{ position: 'fixed', width: '100%', zIndex: 1 }}>
-    						<div className="row">
-    							<div className="col-md-6 col-sm-6 col-xs-4">
-							      	<Menu
-							        	theme="dark"
-							        	mode="horizontal"
-							        	defaultSelectedKeys={['1']}
-							        	style={{ lineHeight: '64px'}}
-							      	>
-							      		<Menu.Item key="1"><h2>ChatterCom</h2></Menu.Item>
-								        <Menu.Item key="2">
-								        	<Search
-								        		dataSource={this.props.searchDataSource}
-								        		searchUser={this.props.searchUser}/>
-								        </Menu.Item>
-		      						</Menu>
-		      					</div>
-		      					<div className="col-md-6 col-sm-6 col-xs-8">
-							      	<Menu
-							        	theme="dark"
-							        	mode="horizontal"
-							        	style={{ lineHeight: '64px', float: 'right'}}
-							      	>
-								        <Menu.Item key="1">
-								        	<Dropdown overlay={dropdownMenu}>
-								        		<a className="ant-dropdown-link" href="#">
-										          	Hover me <Icon type="down" />
-										        </a>
-								        	</Dropdown>
-								        </Menu.Item>
-		      						</Menu>
-		      					</div>
-	      					</div>
-    					</Header>
+						<Navbar
+							searchDataSource={this.props.searchDataSource}
+							searchUser={this.props.searchUser}
+							picture={this.props.picture}
+						/>
     					<Content style={{ padding: '0 50px', marginTop: 64 }}>
       						<Layout style={{ padding: '24px 0' }}>
       							<div className="row">
@@ -124,13 +84,33 @@ class Home extends Component {
 				        									sendEditorData={this.sendEditorData.bind(this)}
 				        								/>
 				        							</div>
+				        							<div className="partition">
+				        								<p className="random-info"
+				        									style={ this.props.posts.length > 0 ? {display: "inline"} : {display: "none"} }>
+				        									All posts
+				        								</p>
+				        							</div>
 				        							<div className="post-timeline">
 				        								{this.props.posts.length > 0
 				        									?
 															this.props.posts.map((post, index) => {
 																return (
-																	<Card title={post.nickname} extra={TimeSince(new Date(Date.now() - post.date))} key={index} style={{ width: '100%', marginBottom: '1.5em' }}>
-		    															<p>{post.body}</p>
+																	<Card
+																		key={index}
+																		title={
+																			<div className="post-head-title">
+																				<img className="img-circle-sm" src={post.meta.picture} />
+																				<Link
+																					to={`/profile/${post.meta.email}`}
+																					style={{ color: 'black' }}
+																				>
+																					{post.meta.nickname}
+																				</Link>
+																			</div>
+																		}
+																		extra={TimeSince(new Date(Date.now() - post.meta.date))}
+																		style={{ width: '100%', marginBottom: '1.5em' }}>
+		    															<p className="post-body">{post.body}</p>
 		  															</Card>
 																)
 															})

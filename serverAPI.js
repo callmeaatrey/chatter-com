@@ -83,8 +83,9 @@ router.route('/post/new')
 	.post(function(req, res) {
 		console.log(res.body);
 		var post = new Post();
-		post.nickname = req.body.profile.nickname;
-		post.email = req.body.profile.email;
+		post.meta.nickname = req.body.profile.nickname;
+		post.meta.email = req.body.profile.email;
+		post.meta.picture = req.body.profile.picture;
 		post.body = req.body.data;
 
 		post.save(function(err) {
@@ -145,6 +146,18 @@ router.route('/follow/from/:follower/to/:followee')
 router.route('/find/users/:str')
 	.get(function(req, res) {
 		User.find({name: new RegExp("^"+req.params.str, "i")}, function(err, docs) {
+			if(err) {
+				res.send(err);
+			} else {
+				res.json(docs);
+			}
+		});
+	})
+
+// testing API endpoint [not intended for production use]
+router.route('/find/post/all')
+	.get(function(req, res) {
+		Post.find({}).sort({date: -1}).find(function(err, docs) {
 			if(err) {
 				res.send(err);
 			} else {
