@@ -2,11 +2,12 @@ var mongoose = require('mongoose');
 
 // Defining Post Schema
 var PostSchema = new mongoose.Schema({
-	handle: String,
+	email: String,
+	nickname: String,
 	body: String,
 	date: {
-		type: Date,
-		default: Date.now
+		type: String,
+		default: Date.now()
 	}
 });
 

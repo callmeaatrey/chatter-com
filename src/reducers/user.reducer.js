@@ -19,6 +19,9 @@ const userReducer = function(state=initialUserState, action) {
 				nickname: action.profile.nickname,
 				followers: action.profile.followers,
 				following: action.profile.following,
+				meta: action.profile.meta,
+				_id: action.profile._id,
+				password: action.profile.password
 			});
 	}
 	return state;

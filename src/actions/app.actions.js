@@ -8,3 +8,16 @@ export function loaderToggle() {
 		type: 'LOADER_TOGGLE'
 	};
 }
+
+export function togglePostLoader(toggle) {
+	return {
+		type: 'POST_LOADER_TOGGLE',
+		toggle: toggle
+	};
+}
+
+export function editorDisable() {
+	return {
+		type: 'EDITOR_DISABLED'
+	};
+}

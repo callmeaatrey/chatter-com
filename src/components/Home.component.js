@@ -5,11 +5,22 @@ import { Layout, Menu, Breadcrumb, Dropdown, Icon, BackTop, Card } from 'antd';
 import Loader from './Loader.component';
 import Search from './Search.component';
 import AuthService from '../utils/AuthService.util';
+import Editor from './Editor.component';
+import TimeSince from '../utils/TimeSince.util';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
 class Home extends Component {
+
+	handleChange(val) {
+		console.log(val);
+	}
+
+	sendEditorData(e) {
+		this.props.sendEditorData(e);
+	}
+
 	render() {
 		const dropdownMenu = (
 			<Menu>
@@ -99,65 +110,38 @@ class Home extends Component {
 					        					</div>
 				        					</div>
 				        					<div className="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-					        					<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
-  												<Card style={{ width: '100%' }}>
-    												<p>Card content</p>
-    												<p>Card content</p>
-    												<p>Card content</p>
-  												</Card>
+				        						<div className="post-col">
+				        							<div className="write-post">
+				        								<Editor
+				        									loading={this.props.postLoader}
+				        									toggle={this.props.togglePostLoader}
+				        									maxLength="140"
+				        									name={this.props.name}
+				        									postLoader={this.props.postLoader}
+				        									editorDisabled={this.props.editorDisabled}
+				        									sendEditorData={this.sendEditorData.bind(this)}
+				        								/>
+				        							</div>
+				        							<div className="post-timeline">
+				        								{this.props.posts.length > 0
+				        									?
+															this.props.posts.map((post, index) => {
+																return (
+																	<Card title={post.nickname} extra={TimeSince(new Date(Date.now() - post.date))} key={index} style={{ width: '100%' }}>
+		    															<p>{post.body}</p>
+		  															</Card>
+																)
+															})
+															:
+															""
+														}
+
+		  											</div>
+	  											</div>
 					        				</div>
 					        				<div className="col-md-3 col-lg-3 col-sm-3 col-xs-12">
 					        					<Card style={{ width: '100%' }}>
-													<span className="menu-header">People</span>
+													<span className="menu-header">People you should know</span>
 												</Card>
 					        				</div>
 					        			</div>

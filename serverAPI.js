@@ -31,7 +31,7 @@ app.use(cors())
 app.use("/", express.static(__dirname + "/static/"));
 
 // sonnect to mongo database
-mongoose.connect('mongodb://shikher:root@ds139801.mlab.com:39801/chattercom');
+mongoose.connect('mongodb://localhost/chatter-com');
 
 var db = mongoose.connection;
 
@@ -49,6 +49,7 @@ router.get('/', function(req, res) {
 // route for handling user queries
 router.route('/user/:email')
 	.get(function(req, res) {
+		console.log(req.params);
 		User.findOne({email: req.params.email}, function(err, doc) {
 			if (err) {
 				res.send(err);
@@ -73,6 +74,49 @@ router.route('/register/google')
 			} else {
 				console.log(res);
 				res.json({ message: 'User successfully added!' });
+			}
+		});
+	})
+
+// adding new posts
+router.route('/post/new')
+	.post(function(req, res) {
+		console.log(res.body);
+		var post = new Post();
+		post.nickname = req.body.profile.nickname;
+		post.email = req.body.profile.email;
+		post.body = req.body.data;
+
+		post.save(function(err) {
+			if(err) {
+				res.send(err);
+			} else {
+				console.log(res);
+				res.json({ message: 'Post successfully added!', _id: post._id});
+			}
+		});
+	})
+
+// fetching all posts for a user
+router.route('/post/:email')
+	.get(function(req, res) {
+		Post.find({email: req.params.email}, function(err, docs) {
+			if(err) {
+				res.send(err);
+			} else {
+				res.json(docs);
+			}
+		});
+	})
+
+// fetching a single post
+router.route('/post/single/:id')
+	.get(function(req, res) {
+		Post.findOne({_id: req.params.id}, function(err, doc) {
+			if (err) {
+				res.send(err);
+			} else {
+				res.json(doc);
 			}
 		});
 	})

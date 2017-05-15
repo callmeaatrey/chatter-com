@@ -3,8 +3,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
-import { loaderToggle } from '../actions/app.actions';
+import { loaderToggle, togglePostLoader } from '../actions/app.actions';
 import { readProfileViaGoogle } from '../apis/user.api';
+import { createPost } from '../apis/post.api';
 
 // bringing in the presentation component
 import Home from '../components/Home.component';
@@ -18,19 +19,56 @@ class HomeContainer extends Component {
     	props.auth.on('profile_incoming', (profile) => {
     		readProfileViaGoogle(profile);
     	});
+
  	}
 
  	// lifecycle methods
- 	componentDidMount() {
- 		readProfileViaGoogle(this.props.auth.getProfile());
+ 	componentWillMount() {
+ 		(function(props) {
+ 			var timeout = setTimeout(function() {
+ 			if(JSON.stringify(props.auth.getProfile()) != JSON.stringify({})) {
+ 				readProfileViaGoogle(props.auth.getProfile());
+ 				clearTimeout(timeout);
+ 			} else {
+ 				console.log('still waiting!');
+ 			}
+ 		}, 1000);
+
+ 		}(this.props));
+ 	}
+
+ 	// toggle post loader button
+ 	togglePostLoader() {
+ 		store.dispatch(togglePostLoader());
+ 	}
+
+ 	// initiating the save post process
+ 	createPost(data) {
+ 		createPost(data, this.props.user);
  	}
 
 	render() {
-		var { app, user } = this.props;
+		var { app, user, auth, post } = this.props;
+		console.log(post);
 		return (
 			<Home
+				email={user.email}
+				name={user.name}
+				nickname={user.nickname}
+				picture={user.picture}
+				password={user.password}
+				followers={user.followers}
+				following={user.following}
+				id={user._id}
+				meta={user.meta}
 				loader={app.loader}
-				logout={this.props.auth.logout}/>
+				logout={auth.logout}
+				editorState={app.editorState}
+				postLoader={app.postLoader}
+				togglePostLoader={this.togglePostLoader}
+				editorDisabled={app.editorDisabled}
+				sendEditorData={this.createPost.bind(this)}
+				posts={post.posts}/>
 		);
 	}
 }
@@ -39,7 +77,8 @@ class HomeContainer extends Component {
 const mapStateToProps = (store) => {
 	return {
 		app: store.appState,
-		user: store.userState
+		user: store.userState,
+		post: store.postState
 	}
 };
 

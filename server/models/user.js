@@ -16,16 +16,28 @@ var UserSchema = new mongoose.Schema({
 
 	picture: String,
 
-	password: String,
+	password: {
+		type: String,
+		default: 'thisisastrangepassword'
+	},
 
 	followers: [],
 
 	following: [],
 
 	meta: {
-		followers: Number,
-		following: Number,
-		posts: Number
+		followers: {
+			type: Number,
+			default: 0
+		},
+		following: {
+			type: Number,
+			default: 0
+		},
+		posts: {
+			type: Number,
+			default: 0
+		}
 	},
 });
 
