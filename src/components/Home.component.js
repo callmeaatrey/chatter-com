@@ -127,7 +127,7 @@ class Home extends Component {
 				        									?
 															this.props.posts.map((post, index) => {
 																return (
-																	<Card title={post.nickname} extra={TimeSince(new Date(Date.now() - post.date))} key={index} style={{ width: '100%' }}>
+																	<Card title={post.nickname} extra={TimeSince(new Date(Date.now() - post.date))} key={index} style={{ width: '100%', marginBottom: '1.5em' }}>
 		    															<p>{post.body}</p>
 		  															</Card>
 																)

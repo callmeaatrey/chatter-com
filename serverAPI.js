@@ -98,7 +98,7 @@ router.route('/post/new')
 	})
 
 // fetching all posts for a user
-router.route('/post/:email')
+router.route('/post/own/:email')
 	.get(function(req, res) {
 		Post.find({email: req.params.email}, function(err, docs) {
 			if(err) {
@@ -119,6 +119,12 @@ router.route('/post/single/:id')
 				res.json(doc);
 			}
 		});
+	})
+
+// fetching timeline posts
+router.route('/post/timeline/:email')
+	.get(function(req, res) {
+
 	})
 
 // API Route

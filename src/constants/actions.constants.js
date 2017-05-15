@@ -10,3 +10,4 @@ export const LOGIN = 'LOGIN';
 
 // Posts
 export const NEW_POST = 'NEW_POST';
+export const USER_OWN_POSTS = 'USER_OWN_POSTS';

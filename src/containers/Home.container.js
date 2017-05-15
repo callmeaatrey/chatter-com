@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import store from '../store';
 import { loaderToggle, togglePostLoader } from '../actions/app.actions';
 import { readProfileViaGoogle } from '../apis/user.api';
-import { createPost } from '../apis/post.api';
+import { createPost, getTimelinePosts, getOwnPosts } from '../apis/post.api';
 
 // bringing in the presentation component
 import Home from '../components/Home.component';
@@ -27,7 +27,9 @@ class HomeContainer extends Component {
  		(function(props) {
  			var timeout = setTimeout(function() {
  			if(JSON.stringify(props.auth.getProfile()) != JSON.stringify({})) {
- 				readProfileViaGoogle(props.auth.getProfile());
+ 				var profile = props.auth.getProfile();
+ 				readProfileViaGoogle(profile);
+ 				getOwnPosts(profile.email);
  				clearTimeout(timeout);
  			} else {
  				console.log('still waiting!');

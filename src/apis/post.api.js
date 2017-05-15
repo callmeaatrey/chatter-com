@@ -1,7 +1,7 @@
 // HTTP Accessible Functions
 
 import axios from 'axios';
-import { newPost } from '../actions/post.actions';
+import { setNewPost, setOwnPosts } from '../actions/post.actions';
 import store from '../store';
 
 
@@ -22,6 +22,14 @@ export function createPost(postData, profile) {
 // fetches user's own posts
 export function getOwnPosts(email) {
 
+	// handling requests for fetching user's own posts
+	axios.get(`http://localhost:5100/api/post/own/${email}`)
+		.then(res => {
+			store.dispatch(setOwnPosts(res.data));
+		})
+		.catch(err => {
+			console.log(err);
+		});
 }
 
 // fetches a single post
@@ -33,7 +41,7 @@ export function getSinglePost(postId) {
 			if(res.data == null) {
 				return;
 			} else {
-				store.dispatch(newPost(res.data));
+				store.dispatch(setNewPost(res.data));
 			}
 		})
 		.catch(err => {
@@ -44,4 +52,12 @@ export function getSinglePost(postId) {
 // fetches user's timeline posts
 export function getTimelinePosts(email) {
 
+	// handling requests for fetching user's timeline posts
+	axios.get(`http://localhost:5100/api/post/timeline/${email}`)
+		.then(res => {
+			store.dispatch(setTimelinePosts(res.data));
+		})
+		.catch(err => {
+			console.log(err);
+		});
 }

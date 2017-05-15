@@ -15,6 +15,12 @@ const postReducer = function(state=initialPostState, action) {
 			return Object.assign({}, state, {
 				posts: post
 			});
+
+		case types.USER_OWN_POSTS:
+			console.log(action.posts);
+			return Object.assign({}, state, {
+				posts: action.posts
+			});
 	}
 	return state;
 }
