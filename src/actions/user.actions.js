@@ -9,3 +9,11 @@ export function newLogin(profile, dbData) {
 		profile: dbData
 	};
 }
+
+// action handler for populating the search user dataSource
+export function populateDataSourceUser(users) {
+	return {
+		type: 'POPULATE_DATA_SOURCE_USER',
+		users: users
+	};
+}

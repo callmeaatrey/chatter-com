@@ -18,7 +18,7 @@ function searchResult(query) {
 
 function renderResult(user) {
 	return (
-		<Option key={user.id} text={user.name}>
+		<Option key={user._id} text={user.name}>
 			{user.name}
 		</Option>
 	);
@@ -27,10 +27,11 @@ function renderResult(user) {
 class Search extends Component {
 
 	handleSearch(value) {
-		value ? searchResult(value) : []
+		value ? this.props.searchUser(value) : ""
 	}
 
 	render() {
+		console.log(this.props.dataSource);
 		return (
 			<div className="search-wrapper" style={{ width: 200 }}>
 				<AutoComplete
@@ -38,8 +39,8 @@ class Search extends Component {
 					size="large"
 					style={{ width: '100%' }}
 					dataSource={this.props.dataSource.map(renderResult)}
-					onSelect={onSelect}
-					onSearch={this.handleSearch}
+					onSelect={this.onSelect}
+					onSearch={this.handleSearch.bind(this)}
 					placeholder="Search a user"
 					allowClear={true}
 				>

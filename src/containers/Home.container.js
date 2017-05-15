@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
 import { loaderToggle, togglePostLoader } from '../actions/app.actions';
-import { readProfileViaGoogle } from '../apis/user.api';
+import { readProfileViaGoogle, searchUserAPI } from '../apis/user.api';
 import { createPost, getTimelinePosts, getOwnPosts } from '../apis/post.api';
 
 // bringing in the presentation component
@@ -29,7 +29,6 @@ class HomeContainer extends Component {
  			if(JSON.stringify(props.auth.getProfile()) != JSON.stringify({})) {
  				var profile = props.auth.getProfile();
  				readProfileViaGoogle(profile);
- 				getOwnPosts(profile.email);
  				clearTimeout(timeout);
  			} else {
  				console.log('still waiting!');
@@ -47,6 +46,11 @@ class HomeContainer extends Component {
  	// initiating the save post process
  	createPost(data) {
  		createPost(data, this.props.user);
+ 	}
+
+ 	// searching a user
+ 	searchUser(str) {
+ 		searchUserAPI(str);
  	}
 
 	render() {
@@ -70,7 +74,9 @@ class HomeContainer extends Component {
 				togglePostLoader={this.togglePostLoader}
 				editorDisabled={app.editorDisabled}
 				sendEditorData={this.createPost.bind(this)}
-				posts={post.posts}/>
+				posts={post.posts}
+				searchDataSource={user.searchDataSource}
+				searchUser={this.searchUser}/>
 		);
 	}
 }

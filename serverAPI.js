@@ -100,7 +100,7 @@ router.route('/post/new')
 // fetching all posts for a user
 router.route('/post/own/:email')
 	.get(function(req, res) {
-		Post.find({email: req.params.email}, function(err, docs) {
+		Post.find({email: req.params.email}).sort({date: -1}).find(function(err, docs) {
 			if(err) {
 				res.send(err);
 			} else {
@@ -124,7 +124,33 @@ router.route('/post/single/:id')
 // fetching timeline posts
 router.route('/post/timeline/:email')
 	.get(function(req, res) {
+		var following = [];
+		User.findOne({email: req.params.email}, function(err, doc) {
+			if(err) {
+				res.send(err);
+			} else {
+				following = doc.following;
 
+			}
+		});
+	})
+
+// following a user
+router.route('/follow/from/:follower/to/:followee')
+	.post(function(req, res) {
+
+	})
+
+// for finding user in autocomplete
+router.route('/find/users/:str')
+	.get(function(req, res) {
+		User.find({name: new RegExp("^"+req.params.str, "i")}, function(err, docs) {
+			if(err) {
+				res.send(err);
+			} else {
+				res.json(docs);
+			}
+		});
 	})
 
 // API Route

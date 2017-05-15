@@ -7,6 +7,7 @@ export const EDITOR_DISABLED = 'EDITOR_DISABLED';
 
 // User
 export const LOGIN = 'LOGIN';
+export const POPULATE_DATA_SOURCE_USER = 'POPULATE_DATA_SOURCE_USER';
 
 // Posts
 export const NEW_POST = 'NEW_POST';

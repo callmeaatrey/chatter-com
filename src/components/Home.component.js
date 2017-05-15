@@ -52,7 +52,9 @@ class Home extends Component {
 							      	>
 							      		<Menu.Item key="1"><h2>ChatterCom</h2></Menu.Item>
 								        <Menu.Item key="2">
-
+								        	<Search
+								        		dataSource={this.props.searchDataSource}
+								        		searchUser={this.props.searchUser}/>
 								        </Menu.Item>
 		      						</Menu>
 		      					</div>
