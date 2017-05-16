@@ -56,3 +56,9 @@ export function unfollowSuccess(unfollower, unfollowee) {
 		unfollowee: unfollowee
 	};
 }
+
+export function createPostIncrement() {
+	return {
+		type: 'CREATE_POST_INCREMENT'
+	};
+}

@@ -88,11 +88,23 @@ router.route('/post/new')
 		post.meta.picture = req.body.profile.picture;
 		post.body = req.body.data;
 
+		var postIncrement = {
+			$inc: {
+				'meta.posts': 1
+			}
+		};
+
 		post.save(function(err) {
 			if(err) {
 				res.send(err);
 			} else {
-				console.log(res);
+				User.find({email: req.body.profile.email}).update(postIncrement, function(err) {
+					if(err) {
+						res.send(err);
+					} else {
+						console.log('updated');
+					}
+				});
 				res.json({ message: 'Post successfully added!', _id: post._id});
 			}
 		});

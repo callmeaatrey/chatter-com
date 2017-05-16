@@ -1,7 +1,7 @@
 // Profile presentation component
 
 import React, { Component } from 'react';
-import { Layout, Menu, Dropdown, Icon, BackTop, Card, Button, Tabs } from 'antd';
+import { Layout, Menu, Dropdown, Icon, BackTop, Card, Button, Tabs, Badge } from 'antd';
 import Navbar from './Navbar.component';
 import Loader from './Loader.component';
 import SettingsForm from './ProfileSettings.component';
@@ -14,6 +14,7 @@ const TabPane = Tabs.TabPane;
 
 class Profile extends Component {
 	render() {
+		console.log(this.props.foreignUser);
 		return (
 			<div className="profile-wrapper">
 				<Loader active={this.props.loader} />
@@ -99,7 +100,7 @@ class Profile extends Component {
 					        					<div className="row">
 					        						<div className="col-md-12">
 						        						<Tabs defaultActiveKey="1">
-	    													<TabPane tab="Posts" key="1">
+	    													<TabPane tab={<span>Posts <Badge count={this.props.foreignUserPosts.length} style={{ marginLeft: '6px', backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }} /></span>} key="1">
 	    													{
 	    														this.props.foreignUserPosts.length > 0
 				        										?
@@ -123,20 +124,57 @@ class Profile extends Component {
 		  															</Card>
 															}
 	    													</TabPane>
-	    													<TabPane tab="Followers" key="2">
-	    														Tab 3
+	    													<TabPane tab={<span>Followers <Badge count={this.props.foreignUser !== undefined ? this.props.foreignUser.followers.length : 0} style={{ marginLeft: '6px', backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }} /></span>} key="2">
+	    													{
+	    														this.props.foreignUser !== undefined
+	    														?
+		    														this.props.foreignUser.followers.length > 0
+					        										?
+																		this.props.foreignUser.followers.map((post, index) => {
+																			return (
+																				<div>Followers</div>
+																			)
+																		})
+																	:
+																		<Card
+																			style={{ width: '100%', marginBottom: '1.5em' }}
+																		>
+			    															<p className="post-body">User don't have any followers yet! Come back later.</p>
+			  															</Card>
+			  													:
+			  														''
+															}
 	    													</TabPane>
-	    													<TabPane tab="Following" key="3">
-	    														Tab 3
+	    													<TabPane tab={<span>Following <Badge count={this.props.foreignUser !== undefined ? this.props.foreignUser.following.length : 0} style={{ marginLeft: '3px', backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }} /></span>} key="3">
+	    													{
+	    														this.props.foreignUser !== undefined
+	    														?
+		    														this.props.foreignUser.following.length > 0
+					        										?
+																		this.props.foreignUser.following.map((post, index) => {
+																			return (
+																				<div>Followers</div>
+																			)
+																		})
+																	:
+																		<Card
+																			style={{ width: '100%', marginBottom: '1.5em' }}
+																		>
+			    															<p className="post-body">User don't have any followings yet! Come back later.</p>
+			  															</Card>
+			  													:
+			  														''
+															}
 	    													</TabPane>
 	    													{
 						        								this.props.foreignEmail === this.props.loggedInEmail
 						        								?
-						        									<TabPane tab="Profile Settings" key="4">
+						        									<TabPane tab="Settings" key="4">
 						        										<SettingsForm
 						        											email={this.props.loggedInEmail}
 						        											nickname={this.props.loggedInNickname}
-						        											setPassword={this.props.setPassword}/>
+						        											setPassword={this.props.setPassword}
+						        										/>
 	    															</TabPane>
 						        								:
 						        									''

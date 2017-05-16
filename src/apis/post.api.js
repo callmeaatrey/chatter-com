@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import { setNewPost, setOwnPosts, foreignUserPosts } from '../actions/post.actions';
+import { createPostIncrement } from '../actions/user.actions';
 import store from '../store';
 
 
@@ -12,6 +13,7 @@ export function createPost(postData, profile) {
 	axios.post('http://localhost:5100/api/post/new', {profile: profile, data: postData})
 		.then(res => {
 			console.log(res.data);
+			store.dispatch(createPostIncrement());
 			getSinglePost(res.data._id);
 		})
 		.catch(err => {

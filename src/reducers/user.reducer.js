@@ -90,6 +90,15 @@ const userReducer = function(state=initialUserState, action) {
 				meta: copyMeta,
 				foreignUserProfile: copyForeignProfile
 			});
+
+		case types.CREATE_POST_INCREMENT:
+			return Object.assign({}, state, {
+				meta: {
+					posts: state.meta.posts += 1,
+					followers: state.meta.followers,
+					following: state.meta.following
+				}
+			});
 	}
 	return state;
 }
