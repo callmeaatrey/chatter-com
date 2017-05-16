@@ -152,7 +152,10 @@ router.route('/post/timeline/:email')
 	.get(function(req, res) {
 		var people = [req.params.email];
 		retrieveUser(req.params.email, function(err, doc) {
-			people.concat(doc.followers);
+
+			// for populating the people array
+			people.push.apply(people, doc.following);
+			console.log(people);
 			Post.find({'meta.email': { $in: people }}, function(err, docs) {
 				if(err) {
 					res.send(err);
