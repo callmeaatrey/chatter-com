@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
+import { loaderInit } from '../actions/user.actions';
 import { loaderToggle, togglePostLoader } from '../actions/app.actions';
 import { readProfileViaGoogle, searchUserAPI } from '../apis/user.api';
 import { createPost, getTimelinePosts, getOwnPosts } from '../apis/post.api';
@@ -25,6 +26,7 @@ class HomeContainer extends Component {
  	// lifecycle methods
  	componentWillMount() {
  		(function(props) {
+ 			store.dispatch(loaderInit());
  			var timeout = setTimeout(function() {
  			if(JSON.stringify(props.auth.getProfile()) != JSON.stringify({})) {
  				var profile = props.auth.getProfile();
@@ -55,14 +57,12 @@ class HomeContainer extends Component {
 
 	render() {
 		var { app, user, auth, post } = this.props;
-		console.log(post);
 		return (
 			<Home
 				email={user.email}
 				name={user.name}
 				nickname={user.nickname}
 				picture={user.picture}
-				password={user.password}
 				followers={user.followers}
 				following={user.following}
 				id={user._id}

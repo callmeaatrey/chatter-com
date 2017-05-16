@@ -6,7 +6,7 @@ var PostSchema = new mongoose.Schema({
 		email: String,
 		nickname: String,
 		date: {
-			type: String,
+			type: Date,
 			default: Date.now()
 		},
 		picture: String

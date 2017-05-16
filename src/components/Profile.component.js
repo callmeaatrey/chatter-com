@@ -6,6 +6,7 @@ import Navbar from './Navbar.component';
 import Loader from './Loader.component';
 import SettingsForm from './ProfileSettings.component';
 import PostCard from './PostCard.component';
+import _ from 'lodash';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -60,13 +61,34 @@ class Profile extends Component {
 						        							</div>
 					        							</div>
 					        							{
-					        								this.props.foreignEmail != this.props.loggedInEmail
+					        								this.props.foreignEmail !== this.props.loggedInEmail
 					        								?
-					        									<div className="row">
-						        									<div className="col-md-12 col-lg-12 profile-follow">
-						        										<Button>Follow</Button>
-						        									</div>
-						        								</div>
+					        									this.props.foreignUser !== undefined
+					        									?
+						        									_.includes(this.props.foreignUser.followers, this.props.loggedInEmail)
+						        									?
+						        										<div className="row">
+								        									<div className="col-md-12 col-lg-12 profile-follow">
+								        										<Button
+								        											type="primary"
+								        											onClick={() => {this.props.unfollow(this.props.loggedInEmail, this.props.foreignEmail)}}
+								        										>
+								        											Unfollow
+								        										</Button>
+								        									</div>
+							        									</div>
+							        								:
+							        									<div className="row">
+								        									<div className="col-md-12 col-lg-12 profile-follow">
+								        										<Button
+								        											onClick={() => { this.props.follow(this.props.loggedInEmail, this.props.foreignEmail)}}
+								        										>
+								        											Follow
+								        										</Button>
+								        									</div>
+							        									</div>
+							        							:
+							        								''
 					        								:
 					        									''
 					        							}
@@ -94,7 +116,11 @@ class Profile extends Component {
 																		)
 																	})
 																:
-																	""
+																	<Card
+																		style={{ width: '100%', marginBottom: '1.5em' }}
+																	>
+		    															<p className="post-body">User hasn't made any posts yet! Come back later.</p>
+		  															</Card>
 															}
 	    													</TabPane>
 	    													<TabPane tab="Followers" key="2">

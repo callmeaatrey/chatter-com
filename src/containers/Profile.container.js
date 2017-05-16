@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
-import { readProfileViaGoogle , searchUserAPI, getNewUserProfile, setPassword } from '../apis/user.api';
+import { readProfileViaGoogle , searchUserAPI, getNewUserProfile, setPassword, follow, unfollow } from '../apis/user.api';
 import { getSingleUserPosts } from '../apis/post.api';
 import { loaderInit, destroyProfile } from '../actions/user.actions';
 import AuthService from '../utils/AuthService.util';
@@ -38,6 +38,7 @@ class ProfileContainer extends Component {
  			console.log('new props came');
  			store.dispatch(loaderInit());
  			getNewUserProfile(nextProps.params.email);
+ 			getSingleUserPosts(nextProps.params.email);
  		}
  	}
 
@@ -53,6 +54,16 @@ class ProfileContainer extends Component {
  	// setting user password
  	setPassword(pwd, email) {
  		setPassword(pwd, email);
+ 	}
+
+ 	// follow a user
+ 	followUser(follower, followee) {
+ 		follow(follower,followee);
+ 	}
+
+ 	// unfollow a user
+ 	unfollowUser(unfollower, unfollowee) {
+ 		unfollow(unfollower, unfollowee);
  	}
 
 	render() {
@@ -75,6 +86,8 @@ class ProfileContainer extends Component {
 				searchUser={this.searchUser}
 				logout={auth.logout}
 				setPassword={this.setPassword}
+				follow={this.followUser}
+				unfollow={this.unfollowUser}
 			/>
 		);
 	}

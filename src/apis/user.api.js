@@ -1,7 +1,7 @@
 // HTTP Accessible Functions
 
 import axios from 'axios';
-import { newLogin, populateDataSourceUser, foreignUserSearch } from '../actions/user.actions';
+import { newLogin, populateDataSourceUser, foreignUserSearch, followSuccess, unfollowSuccess } from '../actions/user.actions';
 import { getOwnPosts } from '../apis/post.api';
 import store from '../store';
 import { browserHistory } from 'react-router';
@@ -74,6 +74,28 @@ export function setPassword(pwd, email) {
 	axios.post(`http://localhost:5100/api/setpwd/${email}`, pwd)
 		.then(res => {
 			console.log(res.data);
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}
+
+export function follow(follower, followee) {
+	axios.put(`http://localhost:5100/api/follow/from/${follower}/to/${followee}`, {})
+		.then(res => {
+			console.log(res.data);
+			store.dispatch(followSuccess(follower, followee));
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}
+
+export function unfollow(unfollower, unfollowee) {
+	axios.put(`http://localhost:5100/api/unfollow/from/${unfollower}/to/${unfollowee}`, {})
+		.then(res => {
+			console.log(res.data);
+			store.dispatch(unfollowSuccess(unfollower, unfollowee));
 		})
 		.catch(err => {
 			console.log(err);

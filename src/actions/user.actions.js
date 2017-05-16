@@ -32,8 +32,27 @@ export function foreignUserSearch(profile) {
 	};
 }
 
+// action handler for destroying profile page on unmount
 export function destroyProfile() {
 	return {
 		type: 'DESTROY_FOREIGN_PROFILE'
+	};
+}
+
+// action handler for modifying state on successful follow
+export function followSuccess(follower, followee) {
+	return {
+		type: 'FOLLOW_SUCCESS',
+		follower: follower,
+		followee: followee
+	};
+}
+
+// action handler for modifying state on successful unfollow
+export function unfollowSuccess(unfollower, unfollowee) {
+	return {
+		type: 'UNFOLLOW_SUCCESS',
+		unfollower: unfollower,
+		unfollowee: unfollowee
 	};
 }

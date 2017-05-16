@@ -37,6 +37,59 @@ const userReducer = function(state=initialUserState, action) {
 			return Object.assign({}, state, {
 				foreignUserProfile: undefined
 			});
+
+		case types.FOLLOW_SUCCESS:
+			var followers = _.concat(state.foreignUserProfile.followers, action.follower);
+			var metaFollowers = state.meta.followers += 1;
+
+			var copyForeignProfile = Object.assign({}, state.foreignUserProfile, {
+				followers: followers,
+				meta: {
+					followers: state.foreignUserProfile.meta.followers += 1,
+					posts: state.foreignUserProfile.meta.posts,
+					following: state.foreignUserProfile.meta.following
+				}
+			});
+
+			var updatedFollowingLocal = _.concat(state.following, action.followee);
+			var copyMeta = state.meta;
+			copyMeta.followers += 1;
+
+			console.log('new following' + updatedFollowingLocal);
+			console.log('new followers' + copyForeignProfile);
+			return Object.assign({}, state, {
+				following: updatedFollowingLocal,
+				meta: copyMeta,
+				foreignUserProfile: copyForeignProfile
+			});
+
+		case types.UNFOLLOW_SUCCESS:
+			var followers = _.filter(state.foreignUserProfile.followers, (follower, index) => {
+				return follower !== action.unfollower
+			});
+
+			var copyForeignProfile = Object.assign({}, state.foreignUserProfile, {
+				followers: followers,
+				meta: {
+					followers: state.foreignUserProfile.meta.followers -= 1,
+					posts: state.foreignUserProfile.meta.posts,
+					following: state.foreignUserProfile.meta.following
+				}
+			});
+
+			var updatedFollowingLocal = _.filter(state.following, (followee, index) => {
+				return followee !== action.unfollowee
+			});
+			var copyMeta = state.meta;
+			copyMeta.followers -= 1;
+
+			console.log('new following' + updatedFollowingLocal);
+			console.log('new followers' + copyForeignProfile.followers);
+			return Object.assign({}, state, {
+				following: updatedFollowingLocal,
+				meta: copyMeta,
+				foreignUserProfile: copyForeignProfile
+			});
 	}
 	return state;
 }

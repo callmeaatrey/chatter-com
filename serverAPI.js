@@ -139,8 +139,69 @@ router.route('/post/timeline/:email')
 
 // following a user
 router.route('/follow/from/:follower/to/:followee')
-	.post(function(req, res) {
+	.put(function(req, res) {
+		var bulk = User.collection.initializeOrderedBulkOp();
+		var follower = {
+			$push: {
+				following: req.params.followee
+			},
+			$inc: {
+				'meta.following': 1
+			}
+		};
+		var followee = {
+			$push: {
+				followers: req.params.follower
+			},
+			$inc: {
+				'meta.followers': 1
+			}
+		};
+		// bulk operations
+		bulk.find({email: req.params.follower}).update(follower);
+		bulk.find({email: req.params.followee}).update(followee);
 
+		bulk.execute(function(err, doc) {
+			if(err) {
+				res.send(err);
+			} else {
+				res.json({message: `${req.params.follower} followed ${req.params.followee}!`});
+			}
+		});
+	})
+
+// for unfollowing a user
+router.route('/unfollow/from/:follower/to/:followee')
+	.put(function(req, res) {
+		var bulk = User.collection.initializeOrderedBulkOp();
+		var follower = {
+			$pullAll: {
+				following: [req.params.followee]
+			},
+			$inc: {
+				'meta.following': -1
+			}
+		};
+		var followee = {
+			$pullAll: {
+				followers: [req.params.follower]
+			},
+			$inc: {
+				'meta.followers': -1
+			}
+		};
+
+		// bulk operations
+		bulk.find({email: req.params.follower}).update(follower);
+		bulk.find({email: req.params.followee}).update(followee);
+
+		bulk.execute(function(err, doc) {
+			if(err) {
+				res.send(err)
+			} else {
+				res.json({message: `${req.params.follower} unfollowed ${req.params.followee}!`});
+			}
+		})
 	})
 
 // for finding user in autocomplete
