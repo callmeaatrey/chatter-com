@@ -1,8 +1,8 @@
 // HTTP Accessible Functions
 
 import axios from 'axios';
-import { newLogin, populateDataSourceUser, foreignUserSearch, followSuccess, unfollowSuccess } from '../actions/user.actions';
-import { getOwnPosts } from '../apis/post.api';
+import { newLogin, populateDataSourceUser, foreignUserSearch, followSuccess, unfollowSuccess, setProfileFollowers, setProfileFollowing } from '../actions/user.actions';
+import { getOwnPosts, getTimelinePosts } from '../apis/post.api';
 import store from '../store';
 import { browserHistory } from 'react-router';
 
@@ -22,7 +22,7 @@ export function readProfileViaGoogle(profile) {
 			} else {
 				console.log(profile);
 				store.dispatch(newLogin(profile, res.data));
-    			getOwnPosts(profile.email);
+    			getTimelinePosts(profile.email);
 			}
 		})
 		.catch(err => {
@@ -96,6 +96,26 @@ export function unfollow(unfollower, unfollowee) {
 		.then(res => {
 			console.log(res.data);
 			store.dispatch(unfollowSuccess(unfollower, unfollowee));
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}
+
+export function getUserFollowers(email) {
+	axios.get(`http://localhost:5100/api/user/followers/${email}`)
+		.then(res => {
+			store.dispatch(setProfileFollowers(res.data));
+		})
+		.catch(err => {
+			console.log(err);
+	})
+}
+
+export function getUserFollowing(email) {
+	axios.get(`http://localhost:5100/api/user/following/${email}`)
+		.then(res => {
+			store.dispatch(setProfileFollowing(res.data));
 		})
 		.catch(err => {
 			console.log(err);

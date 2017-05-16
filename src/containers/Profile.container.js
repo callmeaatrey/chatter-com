@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
-import { readProfileViaGoogle , searchUserAPI, getNewUserProfile, setPassword, follow, unfollow } from '../apis/user.api';
+import { readProfileViaGoogle , searchUserAPI, getNewUserProfile, setPassword,  follow, unfollow, getUserFollowers, getUserFollowing } from '../apis/user.api';
 import { getSingleUserPosts } from '../apis/post.api';
 import { loaderInit, destroyProfile } from '../actions/user.actions';
 import AuthService from '../utils/AuthService.util';
@@ -24,6 +24,8 @@ class ProfileContainer extends Component {
  				readProfileViaGoogle(profile);
  				getNewUserProfile(props.params.email);
  				getSingleUserPosts(props.params.email);
+ 				getUserFollowers(props.params.email);
+ 				getUserFollowing(props.params.email);
  				clearTimeout(timeout);
  			} else {
  				console.log('still waiting!');
@@ -39,6 +41,8 @@ class ProfileContainer extends Component {
  			store.dispatch(loaderInit());
  			getNewUserProfile(nextProps.params.email);
  			getSingleUserPosts(nextProps.params.email);
+ 			getUserFollowers(nextProps.params.email);
+ 			getUserFollowing(nextProps.params.email);
  		}
  	}
 
@@ -81,6 +85,8 @@ class ProfileContainer extends Component {
 				loggedInFollowing={user.following}
 				loggedInId={user._id}
 				loggedInMeta={user.meta}
+				followersProfiles={user.followersProfiles}
+				followingProfiles={user.followingProfiles}
 				loader={app.loader}
 				searchDataSource={user.searchDataSource}
 				searchUser={this.searchUser}

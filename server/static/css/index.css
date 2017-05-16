@@ -255,6 +255,22 @@
     text-align: center;
 }
 
+	/* <Followering> */
+
+	.followering-picture {
+		top: 0%;
+	}
+
+	.followering-name {
+    	font-size: 1.6em;
+	}
+
+	.followering-nickname {
+
+	}
+
+	/* </Followering */
+
 /* </Profile> */
 
 /* <Media queries> */

@@ -42,7 +42,7 @@ const userReducer = function(state=initialUserState, action) {
 			var followers = _.concat(state.foreignUserProfile.followers, action.follower);
 			var metaFollowers = state.meta.followers += 1;
 
-			var copyForeignProfile = Object.assign({}, state.foreignUserProfile, {
+			var updatedForeignProfile = Object.assign({}, state.foreignUserProfile, {
 				followers: followers,
 				meta: {
 					followers: state.foreignUserProfile.meta.followers += 1,
@@ -52,15 +52,16 @@ const userReducer = function(state=initialUserState, action) {
 			});
 
 			var updatedFollowingLocal = _.concat(state.following, action.followee);
-			var copyMeta = state.meta;
-			copyMeta.followers += 1;
+			var updatedMeta = state.meta;
+			updatedMeta.followers += 1;
 
-			console.log('new following' + updatedFollowingLocal);
-			console.log('new followers' + copyForeignProfile);
+			var updatedFollowersProfiles = _.concat(state.followersProfiles, updatedForeignProfile);
+
 			return Object.assign({}, state, {
 				following: updatedFollowingLocal,
-				meta: copyMeta,
-				foreignUserProfile: copyForeignProfile
+				meta: updatedMeta,
+				foreignUserProfile: updatedForeignProfile,
+				followersProfiles: updatedFollowersProfiles
 			});
 
 		case types.UNFOLLOW_SUCCESS:
@@ -68,7 +69,7 @@ const userReducer = function(state=initialUserState, action) {
 				return follower !== action.unfollower
 			});
 
-			var copyForeignProfile = Object.assign({}, state.foreignUserProfile, {
+			var updatedForeignProfile = Object.assign({}, state.foreignUserProfile, {
 				followers: followers,
 				meta: {
 					followers: state.foreignUserProfile.meta.followers -= 1,
@@ -80,15 +81,18 @@ const userReducer = function(state=initialUserState, action) {
 			var updatedFollowingLocal = _.filter(state.following, (followee, index) => {
 				return followee !== action.unfollowee
 			});
-			var copyMeta = state.meta;
-			copyMeta.followers -= 1;
+			var updatedMeta = state.meta;
+			updatedMeta.followers -= 1;
 
-			console.log('new following' + updatedFollowingLocal);
-			console.log('new followers' + copyForeignProfile.followers);
+			var updatedFollowersProfiles = _.filter(state.followersProfiles, (follower, index) => {
+				return follower.email !== action.unfollowee
+			});
+
 			return Object.assign({}, state, {
 				following: updatedFollowingLocal,
-				meta: copyMeta,
-				foreignUserProfile: copyForeignProfile
+				meta: updatedMeta,
+				foreignUserProfile: updatedForeignProfile,
+				followersProfiles: updatedFollowersProfiles
 			});
 
 		case types.CREATE_POST_INCREMENT:
@@ -98,6 +102,17 @@ const userReducer = function(state=initialUserState, action) {
 					followers: state.meta.followers,
 					following: state.meta.following
 				}
+			});
+
+		case types.SET_PROFILE_FOLLOWERS:
+			console.log(action.followers);
+			return Object.assign({}, state, {
+				followersProfiles: action.followers
+			});
+
+		case types.SET_PROFILE_FOLLOWING:
+			return Object.assign({}, state, {
+				followingProfiles: action.following
 			});
 	}
 	return state;

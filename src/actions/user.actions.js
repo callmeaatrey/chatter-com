@@ -57,8 +57,24 @@ export function unfollowSuccess(unfollower, unfollowee) {
 	};
 }
 
+// action handler for incrementing post counter
 export function createPostIncrement() {
 	return {
 		type: 'CREATE_POST_INCREMENT'
 	};
+}
+
+// action handler for modifying state on successfull followering data fetch
+export function setProfileFollowers(data) {
+	return {
+		type: 'SET_PROFILE_FOLLOWERS',
+		followers: data,
+	};
+}
+
+export function setProfileFollowing(data) {
+	return {
+		type: 'SET_PROFILE_FOLLOWING',
+		following: data
+	}
 }

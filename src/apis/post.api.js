@@ -1,7 +1,7 @@
 // HTTP Accessible Functions
 
 import axios from 'axios';
-import { setNewPost, setOwnPosts, foreignUserPosts } from '../actions/post.actions';
+import { setNewPost, setOwnPosts, foreignUserPosts, setTimelinePosts } from '../actions/post.actions';
 import { createPostIncrement } from '../actions/user.actions';
 import store from '../store';
 

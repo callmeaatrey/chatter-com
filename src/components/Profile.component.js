@@ -6,6 +6,7 @@ import Navbar from './Navbar.component';
 import Loader from './Loader.component';
 import SettingsForm from './ProfileSettings.component';
 import PostCard from './PostCard.component';
+import Followering from './Followering.component';
 import _ from 'lodash';
 
 const { SubMenu } = Menu;
@@ -14,7 +15,6 @@ const TabPane = Tabs.TabPane;
 
 class Profile extends Component {
 	render() {
-		console.log(this.props.foreignUser);
 		return (
 			<div className="profile-wrapper">
 				<Loader active={this.props.loader} />
@@ -126,13 +126,19 @@ class Profile extends Component {
 	    													</TabPane>
 	    													<TabPane tab={<span>Followers <Badge count={this.props.foreignUser !== undefined ? this.props.foreignUser.followers.length : 0} style={{ marginLeft: '6px', backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }} /></span>} key="2">
 	    													{
-	    														this.props.foreignUser !== undefined
+	    														this.props.followersProfiles !== undefined
 	    														?
-		    														this.props.foreignUser.followers.length > 0
+		    														this.props.followersProfiles.length > 0
 					        										?
-																		this.props.foreignUser.followers.map((post, index) => {
+																		this.props.followersProfiles.map((user, index) => {
 																			return (
-																				<div>Followers</div>
+																				<Followering
+																					key={index}
+																					picture={user.picture}
+																					name={user.name}
+																					email={user.email}
+																					nickname={user.nickname}
+																				/>
 																			)
 																		})
 																	:
@@ -147,13 +153,19 @@ class Profile extends Component {
 	    													</TabPane>
 	    													<TabPane tab={<span>Following <Badge count={this.props.foreignUser !== undefined ? this.props.foreignUser.following.length : 0} style={{ marginLeft: '3px', backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }} /></span>} key="3">
 	    													{
-	    														this.props.foreignUser !== undefined
+	    														this.props.followingProfiles !== undefined
 	    														?
-		    														this.props.foreignUser.following.length > 0
+		    														this.props.followingProfiles.length > 0
 					        										?
-																		this.props.foreignUser.following.map((post, index) => {
+																		this.props.followingProfiles.map((user, index) => {
 																			return (
-																				<div>Followers</div>
+																				<Followering
+																					key={index}
+																					picture={user.picture}
+																					name={user.name}
+																					email={user.email}
+																					nickname={user.nickname}
+																				/>
 																			)
 																		})
 																	:

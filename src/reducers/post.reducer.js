@@ -22,6 +22,11 @@ const postReducer = function(state=initialPostState, action) {
 				posts: action.posts
 			});
 
+		case types.USER_TIMELINE_POSTS:
+			return Object.assign({}, state, {
+				posts: action.posts
+			});
+
 		case types.FOREIGN_USER_POSTS:
 			return Object.assign({}, state, {
 				foreignUserPosts: action.posts

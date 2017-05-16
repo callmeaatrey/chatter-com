@@ -20,3 +20,10 @@ export function foreignUserPosts(posts) {
 		posts: posts
 	};
 }
+
+export function setTimelinePosts(posts) {
+	return {
+		type: 'USER_TIMELINE_POSTS',
+		posts: posts
+	};
+}

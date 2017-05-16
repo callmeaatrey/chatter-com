@@ -58,18 +58,12 @@ class Home extends Component {
 					        								</div>
 					        							</div>
 					        							<div className="row meta">
-					        								<div className="col-md-6 col-lg-6">
+					        								<div className="col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
 					        									<p className="profile-meta">
 					        										{this.props.meta !== undefined ? this.props.meta.posts : 0}
 					        									</p>
 					        									<p className="profile-meta-tag">Posts</p>
 					        								</div>
-						        							<div className="col-md-6 col-lg-6">
-					        									<p className="profile-meta">
-					        										{this.props.meta !== undefined ? this.props.meta.followers : 0}
-					        									</p>
-						        								<p className="profile-meta-tag">Followers</p>
-						        							</div>
 					        							</div>
 					        						</Sider>
 					        					</div>

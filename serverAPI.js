@@ -10,7 +10,6 @@ var mongoose = require('mongoose');
 var path = require('path');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var async = require('async');
 
 // bringing in the models
 var User = require('./server/models/user');
