@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var async = require('async');
 
 // bringing in the models
 var User = require('./server/models/user');
@@ -41,10 +42,22 @@ db.once('open', function() {
   	console.log('Connection successful');
 });
 
+// Helper functions
+function retrieveUser(email, callback) {
+  User.findOne({email: email}, function(err, user) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, user);
+    }
+  });
+};
+
 // routing
 router.get('/', function(req, res) {
 	res.json({ message: 'API Initialised' });
 });
+
 
 // route for handling user queries
 router.route('/user/:email')
@@ -138,14 +151,16 @@ router.route('/post/single/:id')
 // fetching timeline posts
 router.route('/post/timeline/:email')
 	.get(function(req, res) {
-		var following = [];
-		User.findOne({'meta.email': req.params.email}, function(err, doc) {
-			if(err) {
-				res.send(err);
-			} else {
-				following = doc.following;
-
-			}
+		var people = [req.params.email];
+		retrieveUser(req.params.email, function(err, doc) {
+			people.concat(doc.followers);
+			Post.find({'meta.email': { $in: people }}, function(err, docs) {
+				if(err) {
+					res.send(err);
+				} else {
+					res.json(docs);
+				}
+			});
 		});
 	})
 
@@ -249,6 +264,38 @@ router.route('/find/post/all')
 			} else {
 				res.json(docs);
 			}
+		});
+	})
+
+// for fetching follower profiles
+router.route('/user/followers/:email')
+	.get(function(req, res) {
+		var followers = [];
+		retrieveUser(req.params.email, function(err, doc) {
+			followers = doc.followers;
+			User.find({email: { $in: followers }}, function(err, docs) {
+				if(err) {
+					res.send(err);
+				} else {
+					res.json(docs);
+				}
+			});
+		});
+	})
+
+// for fetching following profiles
+router.route('/user/following/:email')
+	.get(function(req, res) {
+		var following = [];
+		retrieveUser(req.params.email, function(err, doc) {
+			following = doc.following;
+			User.find({email: { $in: following }}, function(err, docs) {
+				if(err) {
+					res.send(err);
+				} else {
+					res.json(docs);
+				}
+			});
 		});
 	})
 
