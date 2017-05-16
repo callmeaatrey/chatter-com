@@ -265,11 +265,21 @@
     	font-size: 1.6em;
 	}
 
-	.followering-nickname {
+	/* </Followering */
 
+	/* <Suggestion> */
+
+	.suggestion-picture {
+		top: 0%;
 	}
 
-	/* </Followering */
+	.suggestion-name {
+		font-size: 1.2em;
+    	font-weight: 700;
+	}
+
+
+	/* </Suggestion> */
 
 /* </Profile> */
 

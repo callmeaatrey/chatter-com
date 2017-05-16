@@ -73,6 +73,15 @@ class Settings extends Component {
 			<Form onSubmit={this.handleSubmit.bind(this)}>
 				<FormItem
 					{...formItemLayout}
+					label="Name"
+				>
+					<Input
+						defaultValue={this.props.name}
+						disabled={true}
+					/>
+				</FormItem>
+				<FormItem
+					{...formItemLayout}
 					label="E-mail"
 				>
 					<Input

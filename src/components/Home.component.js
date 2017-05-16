@@ -9,6 +9,7 @@ import Editor from './Editor.component';
 import TimeSince from '../utils/TimeSince.util';
 import Navbar from './Navbar.component';
 import PostCard from './PostCard.component';
+import Suggestion from './Suggestion.component';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -88,31 +89,51 @@ class Home extends Component {
 				        								</p>
 				        							</div>
 				        							<div className="post-timeline">
-				        								{this.props.posts.length > 0
+				        								{
+				        									this.props.posts.length > 0
 				        									?
-															this.props.posts.map((post, index) => {
-																return (
-																	<PostCard
-																		key={index}
-																		picture={post.meta.picture}
-																		email={post.meta.email}
-																		nickname={post.meta.nickname}
-																		date={post.meta.date}
-																		body={post.body}
-																	/>
-																)
-															})
+																this.props.posts.map((post, index) => {
+																	return (
+																		<PostCard
+																			key={index}
+																			picture={post.meta.picture}
+																			email={post.meta.email}
+																			nickname={post.meta.nickname}
+																			date={post.meta.date}
+																			body={post.body}
+																		/>
+																	)
+																})
 															:
-															""
+																""
 														}
 
 		  											</div>
 	  											</div>
 					        				</div>
 					        				<div className="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-					        					<Card style={{ width: '100%' }}>
-													<span className="menu-header">People you should know</span>
-												</Card>
+												<span className="menu-header">People you should know</span>
+													{
+														this.props.suggestions.length > 0
+														?
+															this.props.suggestions.map((user, index) => {
+																return (
+																	<Suggestion
+																		key={index}
+																		picture={user.picture}
+																		name={user.name}
+																		nickname={user.nickname}
+																		email={user.email}
+																	/>
+																);
+															})
+														:
+															<Card
+																style={{ width: '100%', marginBottom: '1.5em' }}
+															>
+			    												<p className="post-body">No suggestions for you yet! Come again and meet the greatest minds.</p>
+			  												</Card>
+													}
 					        				</div>
 					        			</div>
 				        			</div>

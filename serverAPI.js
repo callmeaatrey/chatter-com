@@ -301,6 +301,32 @@ router.route('/user/following/:email')
 		});
 	})
 
+// for suggesting users to connect with other users
+router.route('/user/suggestion/:email')
+	.get(function(req, res) {
+		retrieveUser(req.params.email, function(err, doc) {
+			var intersection = []
+				followers = []
+				following = [];
+			var j = 0;
+			followers.push.apply(followers, doc.followers);
+			following.push.apply(following, doc.following);
+			for(var i = 0, len=followers.length; i < len; i++) {
+				if(following.indexOf(followers[i]) == -1) {
+					intersection[j++] = followers[i];
+				}
+			}
+
+			User.find({'email': { $in: intersection }}, function(err, docs) {
+				if(err) {
+					res.send(err);
+				} else {
+					res.json(docs);
+				}
+			});
+		});
+	})
+
 // API Route
 app.use('/api', router);
 

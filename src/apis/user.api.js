@@ -1,7 +1,7 @@
 // HTTP Accessible Functions
 
 import axios from 'axios';
-import { newLogin, populateDataSourceUser, foreignUserSearch, followSuccess, unfollowSuccess, setProfileFollowers, setProfileFollowing } from '../actions/user.actions';
+import { newLogin, populateDataSourceUser, foreignUserSearch, followSuccess, unfollowSuccess, setProfileFollowers, setProfileFollowing, setSuggestions } from '../actions/user.actions';
 import { getOwnPosts, getTimelinePosts } from '../apis/post.api';
 import store from '../store';
 import { browserHistory } from 'react-router';
@@ -116,6 +116,16 @@ export function getUserFollowing(email) {
 	axios.get(`http://localhost:5100/api/user/following/${email}`)
 		.then(res => {
 			store.dispatch(setProfileFollowing(res.data));
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}
+
+export function getSuggestionsForUser(profile) {
+	axios.get(`http://localhost:5100/api/user/suggestion/${profile.email}`)
+		.then(res => {
+			store.dispatch(setSuggestions(res.data));
 		})
 		.catch(err => {
 			console.log(err);

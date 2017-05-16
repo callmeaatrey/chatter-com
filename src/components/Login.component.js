@@ -11,7 +11,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div className="login-wrapper">
-			<Layout className="layout">
+			<Layout className="login-layout">
 				<Header>
 					<div className="logo" />
 						<Menu

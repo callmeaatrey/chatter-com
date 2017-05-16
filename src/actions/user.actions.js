@@ -78,3 +78,10 @@ export function setProfileFollowing(data) {
 		following: data
 	}
 }
+
+export function setSuggestions(sugg) {
+	return {
+		type: 'SET_SUGGESTIONS_USER',
+		suggestions: sugg
+	};
+}

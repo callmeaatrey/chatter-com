@@ -4,7 +4,8 @@ import * as types from '../constants/actions.constants';
 import _ from 'lodash';
 
 const initialUserState = {
-	searchDataSource: []
+	searchDataSource: [],
+	suggestions: []
 };
 
 const userReducer = function(state=initialUserState, action) {
@@ -40,7 +41,6 @@ const userReducer = function(state=initialUserState, action) {
 
 		case types.FOLLOW_SUCCESS:
 			var followers = _.concat(state.foreignUserProfile.followers, action.follower);
-			var metaFollowers = state.meta.followers += 1;
 
 			var updatedForeignProfile = Object.assign({}, state.foreignUserProfile, {
 				followers: followers,
@@ -52,10 +52,18 @@ const userReducer = function(state=initialUserState, action) {
 			});
 
 			var updatedFollowingLocal = _.concat(state.following, action.followee);
+
+			var followerProfile = {
+				name: state.name,
+				email: state.email,
+				nickname: state.nickname,
+				picture: state.picture
+			}
 			var updatedMeta = state.meta;
+
 			updatedMeta.followers += 1;
 
-			var updatedFollowersProfiles = _.concat(state.followersProfiles, updatedForeignProfile);
+			var updatedFollowersProfiles = _.concat(state.followersProfiles, followerProfile);
 
 			return Object.assign({}, state, {
 				following: updatedFollowingLocal,
@@ -85,7 +93,7 @@ const userReducer = function(state=initialUserState, action) {
 			updatedMeta.followers -= 1;
 
 			var updatedFollowersProfiles = _.filter(state.followersProfiles, (follower, index) => {
-				return follower.email !== action.unfollowee
+				return follower.email !== action.unfollower
 			});
 
 			return Object.assign({}, state, {
@@ -113,6 +121,11 @@ const userReducer = function(state=initialUserState, action) {
 		case types.SET_PROFILE_FOLLOWING:
 			return Object.assign({}, state, {
 				followingProfiles: action.following
+			});
+
+		case types.SET_SUGGESTIONS_USER:
+			return Object.assign({}, state, {
+				suggestions: action.suggestions
 			});
 	}
 	return state;

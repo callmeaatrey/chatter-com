@@ -22,7 +22,7 @@ class Navbar extends Component {
 					</div>
 				</Menu.Item>
 				<Menu.Item key="2">
-					<Link to={`/profile/${this.props.currentUser}`} style={{ color: 'black' }}>
+					<Link to={`/profile/${this.props.currentUser}`} style={{ color: 'black', textDecoration: 'none' }}>
 						<div className="row">
 								<div className="col-md-1">
 									<Icon type="contacts" />
@@ -32,17 +32,6 @@ class Navbar extends Component {
 								</div>
 						</div>
 					</Link>
-				</Menu.Item>
-				<Menu.Divider />
-				<Menu.Item key="3">
-					<div className="row">
-						<div className="col-md-1">
-							<Icon type="book" />
-						</div>
-						<div className="col-md-11">
-							My Posts
-						</div>
-					</div>
 				</Menu.Item>
 				<Menu.Divider />
 				<Menu.Item key="4">
@@ -68,7 +57,7 @@ class Navbar extends Component {
 				        	defaultSelectedKeys={['1']}
 				        	style={{ lineHeight: '64px'}}
 				      	>
-							<Menu.Item key="1"><h2 style={{color: '#fff'}}><Link to="/home" style={{ color: '#fff' }}>ChatterCom</Link></h2></Menu.Item>
+							<Menu.Item key="1"><h2 style={{color: '#fff'}}><Link to="/home" style={{ color: '#fff', textDecoration: 'none' }}>ChatterCom</Link></h2></Menu.Item>
 							<Menu.Item key="2">
 					        	<Search
 					        		dataSource={this.props.searchDataSource}

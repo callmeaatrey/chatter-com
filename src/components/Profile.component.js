@@ -183,6 +183,7 @@ class Profile extends Component {
 						        								?
 						        									<TabPane tab="Settings" key="4">
 						        										<SettingsForm
+						        											name={this.props.loggedInName}
 						        											email={this.props.loggedInEmail}
 						        											nickname={this.props.loggedInNickname}
 						        											setPassword={this.props.setPassword}
