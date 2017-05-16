@@ -13,3 +13,10 @@ export function setOwnPosts(posts) {
 		posts: posts
 	};
 }
+
+export function foreignUserPosts(posts) {
+	return {
+		type: 'FOREIGN_USER_POSTS',
+		posts: posts
+	};
+}

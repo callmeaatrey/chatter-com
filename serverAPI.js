@@ -101,10 +101,11 @@ router.route('/post/new')
 // fetching all posts for a user
 router.route('/post/own/:email')
 	.get(function(req, res) {
-		Post.find({email: req.params.email}).sort({date: -1}).find(function(err, docs) {
+		Post.find({'meta.email': req.params.email}).sort({'meta.date': -1}).find(function(err, docs) {
 			if(err) {
 				res.send(err);
 			} else {
+				console.log('docs' + docs);
 				res.json(docs);
 			}
 		});
@@ -126,7 +127,7 @@ router.route('/post/single/:id')
 router.route('/post/timeline/:email')
 	.get(function(req, res) {
 		var following = [];
-		User.findOne({email: req.params.email}, function(err, doc) {
+		User.findOne({'meta.email': req.params.email}, function(err, doc) {
 			if(err) {
 				res.send(err);
 			} else {
@@ -150,6 +151,18 @@ router.route('/find/users/:str')
 				res.send(err);
 			} else {
 				res.json(docs);
+			}
+		});
+	})
+
+// for setting new password for a user
+router.route('/setpwd/:email')
+	.post(function(req, res) {
+		User.update({email: req.params.email}, { $set: { password: req.body.password }}, function(err) {
+			if(err) {
+				res.send(err);
+			} else {
+				res.json({message: 'Password successfully set!', set: true});
 			}
 		});
 	})

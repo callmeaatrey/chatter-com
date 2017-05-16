@@ -4,7 +4,8 @@ import * as types from '../constants/actions.constants';
 import _ from 'lodash';
 
 const initialPostState = {
-	posts: []
+	posts: [],
+	foreignUserPosts: []
 };
 
 const postReducer = function(state=initialPostState, action) {
@@ -17,9 +18,13 @@ const postReducer = function(state=initialPostState, action) {
 			});
 
 		case types.USER_OWN_POSTS:
-			console.log(action.posts);
 			return Object.assign({}, state, {
 				posts: action.posts
+			});
+
+		case types.FOREIGN_USER_POSTS:
+			return Object.assign({}, state, {
+				foreignUserPosts: action.posts
 			});
 	}
 	return state;

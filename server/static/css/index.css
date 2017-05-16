@@ -206,6 +206,55 @@
 
 /* <Profile> */
 
+.profile-wrapper,
+.profile-layout {
+	min-height: 100vh;
+}
+
+.img-circle-xlg {
+	border-radius: 50%;
+    height: 100px;
+    position: relative;
+    margin: 0 auto;
+    top: 2em;
+}
+
+.profile-pic {
+	padding: 0 6.5em 4em 6.5em;
+}
+
+.profile-name {
+    text-align: center;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.profile-nickname {
+	text-align: center;
+	font-size: 1.4em;
+	font-style: italic;
+	color: darkgrey;
+	padding-bottom: 1em;
+	border-bottom: 2px solid lightgrey;
+}
+
+.profile-meta {
+    text-align: center;
+    font-size: 3em;
+    color: dodgerblue;
+}
+
+.profile-meta-tag {
+	text-align: center;
+	font-size: 1.3em;
+	font-weight: 600;
+}
+
+.profile-follow {
+	margin-top: 2em;
+    text-align: center;
+}
+
 /* </Profile> */
 
 /* <Media queries> */

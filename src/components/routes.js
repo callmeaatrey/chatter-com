@@ -33,7 +33,7 @@ const Routes = () => (
 			<IndexRedirect to="/home" />
 			<Route path="home" component={HomeContainer} onEnter={requireAuth} />
 			<Route path="login" component={LoginContainer} onEnter={checkLogin} />
-			<Route path="/profile/:email" component={ProfileContainer} onEnter={requireAuth} />
+			<Route path="profile/:email" component={ProfileContainer} onEnter={requireAuth} />
 			<Route path="*" component={NotFound} />
 		</Route>
 );

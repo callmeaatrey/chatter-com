@@ -19,14 +19,23 @@ const userReducer = function(state=initialUserState, action) {
 				followers: action.profile.followers,
 				following: action.profile.following,
 				meta: action.profile.meta,
-				_id: action.profile._id,
-				password: action.profile.password
+				_id: action.profile._id
 			});
 
 		case types.POPULATE_DATA_SOURCE_USER:
 			console.log(action.users);
 			return Object.assign({}, state, {
 				searchDataSource: action.users
+			});
+
+		case types.FOREIGN_USER_SUCCESS:
+			return Object.assign({}, state, {
+				foreignUserProfile: action.profile
+			});
+
+		case types.DESTROY_FOREIGN_PROFILE:
+			return Object.assign({}, state, {
+				foreignUserProfile: undefined
 			});
 	}
 	return state;

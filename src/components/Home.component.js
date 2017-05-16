@@ -8,6 +8,7 @@ import AuthService from '../utils/AuthService.util';
 import Editor from './Editor.component';
 import TimeSince from '../utils/TimeSince.util';
 import Navbar from './Navbar.component';
+import PostCard from './PostCard.component';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -31,9 +32,11 @@ class Home extends Component {
 					style={ (!this.props.loader) ? {display: "inline"}  : {display: "none"}}>
 					<Layout className="home-layout">
 						<Navbar
+							currentUser={this.props.email}
 							searchDataSource={this.props.searchDataSource}
 							searchUser={this.props.searchUser}
 							picture={this.props.picture}
+							logout={this.props.logout}
 						/>
     					<Content style={{ padding: '0 50px', marginTop: 64 }}>
       						<Layout style={{ padding: '24px 0' }}>
@@ -95,23 +98,14 @@ class Home extends Component {
 				        									?
 															this.props.posts.map((post, index) => {
 																return (
-																	<Card
+																	<PostCard
 																		key={index}
-																		title={
-																			<div className="post-head-title">
-																				<img className="img-circle-sm" src={post.meta.picture} />
-																				<Link
-																					to={`/profile/${post.meta.email}`}
-																					style={{ color: 'black' }}
-																				>
-																					{post.meta.nickname}
-																				</Link>
-																			</div>
-																		}
-																		extra={TimeSince(new Date(Date.now() - post.meta.date))}
-																		style={{ width: '100%', marginBottom: '1.5em' }}>
-		    															<p className="post-body">{post.body}</p>
-		  															</Card>
+																		picture={post.meta.picture}
+																		email={post.meta.email}
+																		nickname={post.meta.nickname}
+																		date={post.meta.date}
+																		body={post.body}
+																	/>
 																)
 															})
 															:

@@ -17,3 +17,23 @@ export function populateDataSourceUser(users) {
 		users: users
 	};
 }
+
+export function loaderInit() {
+	return {
+		type: 'LOADER_INIT'
+	};
+}
+
+// action handler for storing not your profile
+export function foreignUserSearch(profile) {
+	return {
+		type: 'FOREIGN_USER_SUCCESS',
+		profile: profile
+	};
+}
+
+export function destroyProfile() {
+	return {
+		type: 'DESTROY_FOREIGN_PROFILE'
+	};
+}

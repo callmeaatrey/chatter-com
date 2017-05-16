@@ -14,7 +14,7 @@ const appReducer = function(state=initialAppState, action) {
 	switch(action.type) {
 		case types.LOGIN:
 			return Object.assign({}, state, {
-				loader: !state.loader,
+				loader: false,
 				loggedIn: true
 			});
 
@@ -32,6 +32,16 @@ const appReducer = function(state=initialAppState, action) {
 		case types.NEW_POST:
 			return Object.assign({}, state, {
 				editorDisabled: false,
+			});
+
+		case types.LOADER_INIT:
+			return Object.assign({}, state, {
+				loader: true
+			});
+
+		case types.FOREIGN_USER_SUCCESS:
+			return Object.assign({}, state, {
+				loader: false
 			});
 	}
 	return state;

@@ -1,9 +1,10 @@
 // HTTP Accessible Functions
 
 import axios from 'axios';
-import { newLogin, populateDataSourceUser } from '../actions/user.actions';
+import { newLogin, populateDataSourceUser, foreignUserSearch } from '../actions/user.actions';
 import { getOwnPosts } from '../apis/post.api';
 import store from '../store';
+import { browserHistory } from 'react-router';
 
 // checks if a profile already exists
 export function readProfileViaGoogle(profile) {
@@ -49,6 +50,30 @@ export function searchUserAPI(str) {
 	axios.get(`http://localhost:5100/api/find/users/${str}`)
 		.then(res => {
 			store.dispatch(populateDataSourceUser(res.data));
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}
+
+export function getNewUserProfile(email) {
+	axios.get(`http://localhost:5100/api/user/${email}`)
+		.then(res => {
+			if(res.data == null) {
+				browserHistory.replace('/404');
+			} else {
+				store.dispatch(foreignUserSearch(res.data));
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}
+
+export function setPassword(pwd, email) {
+	axios.post(`http://localhost:5100/api/setpwd/${email}`, pwd)
+		.then(res => {
+			console.log(res.data);
 		})
 		.catch(err => {
 			console.log(err);

@@ -1,7 +1,7 @@
 // HTTP Accessible Functions
 
 import axios from 'axios';
-import { setNewPost, setOwnPosts } from '../actions/post.actions';
+import { setNewPost, setOwnPosts, foreignUserPosts } from '../actions/post.actions';
 import store from '../store';
 
 
@@ -18,6 +18,16 @@ export function createPost(postData, profile) {
 			console.log(err);
 		});
 
+}
+
+export function getSingleUserPosts(email) {
+	axios.get(`http://localhost:5100/api/post/own/${email}`)
+		.then(res => {
+			store.dispatch(foreignUserPosts(res.data));
+		})
+		.catch(err => {
+			console.log(err);
+		})
 }
 
 // fetches user's own posts
