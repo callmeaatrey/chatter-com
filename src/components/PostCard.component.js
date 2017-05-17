@@ -24,7 +24,7 @@ class PostCard extends Component {
 						</Link>
 					</div>
 				}
-				extra={TimeSince(new Date(Date.now() - this.props.date))}
+				extra={TimeSince(this.props.date)}
 				style={{ width: '100%', marginBottom: '1.5em' }}
 			>
 		    	<p className="post-body">{this.props.body}</p>

@@ -105,6 +105,7 @@ router.route('/post/new')
 		post.meta.email = req.body.profile.email;
 		post.meta.picture = req.body.profile.picture;
 		post.body = req.body.data;
+		post.meta.date = Date.now();
 
 		var postIncrement = {
 			$inc: {
