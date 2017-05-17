@@ -29,10 +29,10 @@ class Login extends Component {
 				<Content style={{ padding: '0 50px' }}>
 					<div className="login-main">
 						<div className="row">
-							<div className="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-xs-12 col-sm-offset-3 col-sm-6">
+							<div className="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 login-card-container">
 								<Card style={{ width: '100%' }}>
 									<div className="row">
-										<div className="col-md-6 col-xs-12 col-sm-12 login-left">
+										<div className="col-md-6 col-xs-12 col-sm-12 col-lg-6 login-left">
 											<span className="menu-header">Social Accounts</span>
 											<Button
 												type="danger"
@@ -44,7 +44,7 @@ class Login extends Component {
 												By signing up you indicate that you have read and agree to the Terms of Service and Privacy Policy.
 											</p>
 										</div>
-										<div className="col-md-6 col-xs-12 col-sm-12 login-right">
+										<div className="col-md-6 col-xs-12 col-sm-12 col-lg-6 login-right">
 											<span className="menu-header">Login</span>
 											<MainLogin />
 										</div>

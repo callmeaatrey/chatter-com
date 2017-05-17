@@ -346,5 +346,14 @@
 		display: none;
 	}
 }
+
+/* Login container fix */
+@media screen and (max-width: 1500px) and (min-width: 1200px) {
+	.login-card-container {
+    	margin-left: 25%;
+    	flex-basis: 50%;
+    	max-width: 100%;
+	}
+}
 /* </Media Queries> */
 
