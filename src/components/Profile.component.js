@@ -48,7 +48,7 @@ class Profile extends Component {
 					        								</div>
 					        							</div>
 					        							<div className="row">
-					        								<div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+					        								<div className="col-md-12 col-lg-12 col-sm-12 col-xs-12 profile-page-details-container">
 					        									<p className="profile-name">{this.props.foreignUser !== undefined ? this.props.foreignUser.name : ''}</p>
 					        									<p className="profile-nickname">{this.props.foreignUser !== undefined ? this.props.foreignUser.nickname : ''}</p>
 					        								</div>
@@ -249,6 +249,9 @@ class Profile extends Component {
 		      					</div>
 							</Layout>
 						</Content>
+						<Footer style={{ textAlign: 'center', fontSize: '1.1em' }}>
+							ChatterCom ©2017 Made with <Icon type="heart" style={{ color: 'red' }} /> by Shikher Aatrey
+						</Footer>
 					</Layout>
 				</div>
 			</div>

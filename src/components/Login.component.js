@@ -54,8 +54,8 @@ class Login extends Component {
 						</div>
 					</div>
 				</Content>
-				<Footer style={{ textAlign: 'center' }}>
-				ChatterCom ©2017 Created by Shikher Aatrey
+				<Footer style={{ textAlign: 'center', fontSize: '1.1em' }}>
+					ChatterCom ©2017 Made with <Icon type="heart" style={{ color: 'red' }} /> by Shikher Aatrey
 				</Footer>
 			</Layout>
 			</div>

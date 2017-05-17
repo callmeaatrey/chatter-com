@@ -76,7 +76,7 @@ class Home extends Component {
 					        									<p className="profile-nickname">{this.props.nickname}</p>
 					        								</div>
 					        							</div>
-					        							<div className="row meta">
+					        							<div className="row meta-home">
 					        								<div className="col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4 col-sm-offset-4 col-sm-12 col-xs-12">
 					        									<p className="profile-meta">
 					        										{this.props.meta !== undefined ? this.props.meta.posts : 0}
@@ -102,7 +102,7 @@ class Home extends Component {
 				        								/>
 				        							</div>
 				        							<div className="partition">
-				        								<p className="random-info"
+				        								<p className="random-info menu-header"
 				        									style={ this.props.posts.length > 0 ? {display: "inline"} : {display: "none"} }>
 				        									All posts
 				        								</p>
@@ -163,6 +163,9 @@ class Home extends Component {
 		        				</div>
       						</Layout>
     					</Content>
+    					<Footer style={{ textAlign: 'center', fontSize: '1.1em' }}>
+							ChatterCom ©2017 Made with <Icon type="heart" style={{ color: 'red' }} /> by Shikher Aatrey
+						</Footer>
   					</Layout>
 				</div>
 			</div>

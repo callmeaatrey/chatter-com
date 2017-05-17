@@ -286,7 +286,11 @@
 	padding: 0 10px !important;
 }
 
-.meta {
+.profile-page-details-container {
+	padding: 0 24px !important;
+}
+
+.meta-home {
 	position: relative;
 	left: 0%;
 }
@@ -325,6 +329,12 @@
     .fixed-sider {
     	width: 20%;
     }
+}
+
+@media screen and (max-width: 991px) and (min-width: 767px) {
+	.meta-home {
+		transform: translate(-30%, 0%);
+	}
 }
 
 /* For 'xs' resolutions */
