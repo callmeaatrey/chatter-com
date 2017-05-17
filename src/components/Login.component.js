@@ -1,4 +1,7 @@
-// Landing Presentation Component
+/*
+* Login and Register Presentation Component
+* @props - login
+*/
 
 import React, { Component } from 'react';
 import AuthService from '../utils/AuthService.util';

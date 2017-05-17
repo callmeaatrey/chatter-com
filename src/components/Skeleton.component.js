@@ -1,3 +1,8 @@
+/*
+* Skeleton component
+* @props - route
+*/
+
 import React, { Component } from 'react';
 
 class Skeleton extends Component {

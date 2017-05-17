@@ -1,7 +1,12 @@
-// Profile presentation component
+/*
+* Profile presentation component
+* @props - foreignUser, foreignUserPosts, foreignEmail, loggedInEmail, loggedInName, loggedInNickname,
+*        loggedInPicture, loggedInFollowers, loggedInFollowing, loggedInId, loggedInMeta, followersProfiles,
+*        followingProfiles, loader, searchDataSource, searchUser, logout, setPassword, follow, unfollow
+*/
 
 import React, { Component } from 'react';
-import { Layout, Menu, Dropdown, Icon, BackTop, Card, Button, Tabs, Badge } from 'antd';
+import { Layout, Menu, Dropdown, Icon, BackTop, Card, Button, Tabs, Badge, message } from 'antd';
 import Navbar from './Navbar.component';
 import Loader from './Loader.component';
 import SettingsForm from './ProfileSettings.component';
@@ -31,30 +36,31 @@ class Profile extends Component {
 						<Content style={{ padding: '0 50px', marginTop: 64 }}>
 							<Layout style={{ padding: '24px 0' }}>
 								<div className="row">
-									<div className="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+									<div className="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 col-sm-12 col-xs-12">
 										<div className="row">
+											{/* Quick profile leftsider */}
 	      									<div className="col-md-3 col-lg-3 col-sm-3 col-xs-12">
 		      									<div className="fixed-sider">
 					        						<Sider width={'100%'} style={{ background: '#fff', border: '1px solid lightgrey', paddingBottom: '16px' }}>
 					        							<div className="row profile-pic">
-					        								<div className="col-md-12 col-lg-12">
+					        								<div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 					        									<img className="img-circle-xlg" src={this.props.foreignUser !== undefined ? this.props.foreignUser.picture : ''} />
 					        								</div>
 					        							</div>
 					        							<div className="row">
-					        								<div className="col-md-12 col-lg-12">
+					        								<div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 					        									<p className="profile-name">{this.props.foreignUser !== undefined ? this.props.foreignUser.name : ''}</p>
 					        									<p className="profile-nickname">{this.props.foreignUser !== undefined ? this.props.foreignUser.nickname : ''}</p>
 					        								</div>
 					        							</div>
 					        							<div className="row meta">
-					        								<div className="col-md-6 col-lg-6">
+					        								<div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 no-right-padding">
 					        									<p className="profile-meta">
 					        										{this.props.foreignUser !== undefined ? this.props.foreignUser.meta.posts : 0}
 					        									</p>
 					        									<p className="profile-meta-tag">Posts</p>
 					        								</div>
-						        							<div className="col-md-6 col-lg-6">
+						        							<div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 no-left-padding">
 					        									<p className="profile-meta">
 					        										{this.props.foreignUser !== undefined ? this.props.foreignUser.meta.followers : 0}
 					        									</p>
@@ -69,10 +75,13 @@ class Profile extends Component {
 						        									_.includes(this.props.foreignUser.followers, this.props.loggedInEmail)
 						        									?
 						        										<div className="row">
-								        									<div className="col-md-12 col-lg-12 profile-follow">
+								        									<div className="col-md-12 col-lg-12 col-sm-12 col-xs-12 profile-follow">
 								        										<Button
 								        											type="primary"
-								        											onClick={() => {this.props.unfollow(this.props.loggedInEmail, this.props.foreignEmail)}}
+								        											onClick={() => {
+								        												message.success('Unfollowed!')
+								        												this.props.unfollow(this.props.loggedInEmail, this.props.foreignEmail)
+								        											}}
 								        										>
 								        											Unfollow
 								        										</Button>
@@ -80,9 +89,12 @@ class Profile extends Component {
 							        									</div>
 							        								:
 							        									<div className="row">
-								        									<div className="col-md-12 col-lg-12 profile-follow">
+								        									<div className="col-md-12 col-lg-12 col-sm-12 col-xs-12 profile-follow">
 								        										<Button
-								        											onClick={() => { this.props.follow(this.props.loggedInEmail, this.props.foreignEmail)}}
+								        											onClick={() => {
+								        												message.success('Followed!')
+								        												this.props.follow(this.props.loggedInEmail, this.props.foreignEmail)
+								        											}}
 								        										>
 								        											Follow
 								        										</Button>
@@ -96,11 +108,23 @@ class Profile extends Component {
 					        						</Sider>
 					        					</div>
 					        				</div>
-					        				<div className="col-md-6 col-lg-6">
+					        				<div className="col-md-9 col-lg-9 col-sm-9 col-xs-12">
 					        					<div className="row">
-					        						<div className="col-md-12">
+					        						{/* Tabs */}
+					        						<div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+					        							{/* Posts Tab */}
 						        						<Tabs defaultActiveKey="1">
-	    													<TabPane tab={<span>Posts <Badge count={this.props.foreignUserPosts.length} style={{ marginLeft: '6px', backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }} /></span>} key="1">
+	    													<TabPane tab={
+	    														<span>
+	    															Posts
+	    															<Badge count={this.props.foreignUserPosts.length}
+	    															style={{ marginLeft: '6px',
+	    																	backgroundColor: '#fff',
+	    																	color: '#999',
+	    																	boxShadow: '0 0 0 1px #d9d9d9 inset'
+	    															}} />
+	    														</span>
+	    													} key="1">
 	    													{
 	    														this.props.foreignUserPosts.length > 0
 				        										?
@@ -124,7 +148,19 @@ class Profile extends Component {
 		  															</Card>
 															}
 	    													</TabPane>
-	    													<TabPane tab={<span>Followers <Badge count={this.props.foreignUser !== undefined ? this.props.foreignUser.followers.length : 0} style={{ marginLeft: '6px', backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }} /></span>} key="2">
+	    													{/* Followers Tab */}
+	    													<TabPane tab={
+	    														<span>
+	    															Followers
+	    															<Badge
+	    																count={this.props.foreignUser !== undefined ? this.props.foreignUser.followers.length : 0}
+	    																style={{ marginLeft: '6px',
+	    																		backgroundColor: '#fff',
+	    																		color: '#999',
+	    																		boxShadow: '0 0 0 1px #d9d9d9 inset'
+	    																	}} />
+	    																</span>
+	    														} key="2">
 	    													{
 	    														this.props.followersProfiles !== undefined
 	    														?
@@ -151,7 +187,18 @@ class Profile extends Component {
 			  														''
 															}
 	    													</TabPane>
-	    													<TabPane tab={<span>Following <Badge count={this.props.foreignUser !== undefined ? this.props.foreignUser.following.length : 0} style={{ marginLeft: '3px', backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }} /></span>} key="3">
+	    													{/* Following Tab */}
+	    													<TabPane tab={
+	    														<span>
+	    															Following
+	    															<Badge count={this.props.foreignUser !== undefined ? this.props.foreignUser.following.length : 0}
+	    															style={{ marginLeft: '3px',
+	    																	backgroundColor: '#fff',
+	    																	color: '#999',
+	    																	boxShadow: '0 0 0 1px #d9d9d9 inset'
+	    																}} />
+	    															</span>
+	    														} key="3">
 	    													{
 	    														this.props.followingProfiles !== undefined
 	    														?
@@ -178,6 +225,7 @@ class Profile extends Component {
 			  														''
 															}
 	    													</TabPane>
+	    													{/* Profile Settings Tab */}
 	    													{
 						        								this.props.foreignEmail === this.props.loggedInEmail
 						        								?

@@ -1,7 +1,10 @@
-// Editor presentation component
+/*
+* Editor presentation component
+* @props - name, maxLength, editorDisabled, postLoader, sendEditorData
+*/
 
 import React, { Component } from 'react';
-import { Input, Button, Spin } from 'antd';
+import { Input, Button, Spin, message } from 'antd';
 import store from '../store';
 import { togglePostLoader, editorDisable } from '../actions/app.actions';
 
@@ -51,6 +54,7 @@ class Editor extends Component {
 			<div className="editor">
 				<div className="editor-main">
 					<Spin spinning={this.props.editorDisabled} tip="Posting...">
+						{/* Textarea */}
 						<Input
 							type="textarea"
 							rows={4}
@@ -63,6 +67,7 @@ class Editor extends Component {
 					</Spin>
 				</div>
 				<div className="editor-btn">
+					{/* Post Button */}
 					<Button
 						type="primary"
 						onClick={this.clickSubmit.bind(this)}
@@ -70,6 +75,7 @@ class Editor extends Component {
 					>
 			          	Post
 			        </Button>
+			    	{/* Remaining character count */}
 			        <span id="chars-remaining">{ this.props.maxLength } characters remaining</span>
 			    </div>
 		    </div>

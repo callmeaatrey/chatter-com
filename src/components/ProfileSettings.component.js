@@ -1,7 +1,10 @@
-// Profile Settings component
+/*
+* Profile Settings component
+* @props - setPassword, email, name, nickname
+*/
 
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, notification } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -15,6 +18,10 @@ class Settings extends Component {
 		e.preventDefault();
 		this.props.form.validateFieldsAndScroll((err, values) => {
 			if(!err) {
+				notification.open({
+				    message: 'Hooray!',
+				    description: 'Your password is successfully changed!',
+				});
 				console.log('Form values are: ', values);
 				this.props.setPassword(values.password, this.props.email);
 				this.props.form.resetFields();

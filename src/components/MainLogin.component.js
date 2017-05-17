@@ -1,7 +1,10 @@
-// Main Login Presentation Component
+/*
+* LoginForm Presentation Component
+* @props - form
+*/
 
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -11,16 +14,15 @@ class LoginForm extends Component {
 		e.preventDefault();
 		this.props.form.validateFields((err, values) => {
 			if (!err) {
-				console.log('Received values of form: ', values);
-				// this.props.handleLoginForm(values);
-		    }
+				message.info('We prefer if you use a social account to login and register!', 2.5);
+		  }
 		});
 	}
 
 	render() {
 		const { getFieldDecorator } = this.props.form;
 		return (
-			<Form onSubmit={this.handleSubmit} className="login-form">
+			<Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
         		<FormItem>
           			{getFieldDecorator('userName', {
             			rules: [{ required: true, message: 'Please input your username!' }],
@@ -42,11 +44,10 @@ class LoginForm extends Component {
           				})(
             			<Checkbox>Remember me</Checkbox>
           			)}
-          			<a className="login-form-forgot" href="">Forgot password</a>
+          			<a className="login-form-forgot" href="#">Forgot password</a>
           			<Button type="primary" htmlType="submit" className="login-form-button">
             			Log in
           			</Button>
-          			Or <a href="">register now!</a>
         		</FormItem>
       		</Form>
 		);

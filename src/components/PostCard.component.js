@@ -1,4 +1,7 @@
-// Post presentation component
+/*
+* Post presentation component
+* @props - index, picture, nickname, email, date, body
+*/
 
 import React, { Component } from 'react';
 import { Card } from 'antd';

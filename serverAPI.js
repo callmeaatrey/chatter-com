@@ -1,6 +1,12 @@
 /*
  * API Server File
  * Written By: Shikher Aatrey
+ * @Indexroute - /api
+ * @getRoutes - /user/:email, /post/own/:email, /post/single/:id, /post/timeline/:email,
+ * 				/find/users/:str, /find/post/all, /user/followers/:email, /user/following/:email,
+ * 				/user/suggestion/:email
+ * @postRoutes - /register/google, /post/new, /setpwd/:email,
+ * @putRoutes - /follow/from/:follower/to/:followee, /unfollow/from/:follower/to/:followee,
  */
 
 // adding dependencies
@@ -41,7 +47,7 @@ db.once('open', function() {
   	console.log('Connection successful');
 });
 
-// Helper functions
+// helper functions
 function retrieveUser(email, callback) {
   User.findOne({email: email}, function(err, user) {
     if (err) {

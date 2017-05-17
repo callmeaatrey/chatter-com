@@ -1,26 +1,29 @@
-// HTTP Accessible Functions
+/*
+* HTTP Accessor Methods
+* @methods - readProfileViaGoogle, createProfileViaGoogle, searchUserAPI, getNewUserProfile,
+*          setPassword, follow, unfollow, getUserFollowers, getUserFollowing, getSuggestionsForUser
+*/
 
 import axios from 'axios';
-import { newLogin, populateDataSourceUser, foreignUserSearch, followSuccess, unfollowSuccess, setProfileFollowers, setProfileFollowing, setSuggestions } from '../actions/user.actions';
+import { newLogin, populateDataSourceUser, foreignUserSearch, followSuccess, unfollowSuccess,
+		setProfileFollowers, setProfileFollowing, setSuggestions } from '../actions/user.actions';
 import { getOwnPosts, getTimelinePosts } from '../apis/post.api';
 import store from '../store';
 import { browserHistory } from 'react-router';
 
-// checks if a profile already exists
+// checks if a profile already exists; if not then creates one
+// @param {Object} profile
 export function readProfileViaGoogle(profile) {
-	console.log(profile);
 
 	if(typeof profile.email == undefined) {
 		return;
 	}
-	// handling requests for fetching user profiles or adding new profiles
+
 	axios.get(`http://localhost:5100/api/user/${profile.email}`)
 		.then(res => {
 			if(res.data == null) {
-
 				createProfileViaGoogle(profile);
 			} else {
-				console.log(profile);
 				store.dispatch(newLogin(profile, res.data));
     			getTimelinePosts(profile.email);
 			}
@@ -31,9 +34,9 @@ export function readProfileViaGoogle(profile) {
 }
 
 // creates a new profile
+// @param {Object} profile
 export function createProfileViaGoogle(profile) {
-	console.log(profile);
-	// handling requests for creating new profile
+
 	axios.post('http://localhost:5100/api/register/google', profile)
 		.then(res => {
 			readProfileViaGoogle(profile);
@@ -43,10 +46,10 @@ export function createProfileViaGoogle(profile) {
 		});
 }
 
-// searches all possible users
+// searches all possible users corresponding to the argument string
+// @param {String} str
 export function searchUserAPI(str) {
 
-	// handling requests for searching users
 	axios.get(`http://localhost:5100/api/find/users/${str}`)
 		.then(res => {
 			store.dispatch(populateDataSourceUser(res.data));
@@ -56,6 +59,8 @@ export function searchUserAPI(str) {
 		})
 }
 
+// gets foreign user's profile
+// @param {String} email
 export function getNewUserProfile(email) {
 	axios.get(`http://localhost:5100/api/user/${email}`)
 		.then(res => {
@@ -70,6 +75,9 @@ export function getNewUserProfile(email) {
 		})
 }
 
+// sets password for a user
+// @param {String} pwd
+// @param {String} email
 export function setPassword(pwd, email) {
 	axios.post(`http://localhost:5100/api/setpwd/${email}`, pwd)
 		.then(res => {
@@ -80,6 +88,9 @@ export function setPassword(pwd, email) {
 		})
 }
 
+// follow a user
+// @param {String} follower
+// @param {String} followee
 export function follow(follower, followee) {
 	axios.put(`http://localhost:5100/api/follow/from/${follower}/to/${followee}`, {})
 		.then(res => {
@@ -91,6 +102,9 @@ export function follow(follower, followee) {
 		})
 }
 
+// unfollow a user
+// @param {String} unfollower
+// @param {String} unfollowee
 export function unfollow(unfollower, unfollowee) {
 	axios.put(`http://localhost:5100/api/unfollow/from/${unfollower}/to/${unfollowee}`, {})
 		.then(res => {
@@ -102,6 +116,8 @@ export function unfollow(unfollower, unfollowee) {
 		})
 }
 
+// gets followers profiles for a user
+// @param {String} email
 export function getUserFollowers(email) {
 	axios.get(`http://localhost:5100/api/user/followers/${email}`)
 		.then(res => {
@@ -112,6 +128,8 @@ export function getUserFollowers(email) {
 	})
 }
 
+// gets following profiles for a user
+// @param {String} email
 export function getUserFollowing(email) {
 	axios.get(`http://localhost:5100/api/user/following/${email}`)
 		.then(res => {
@@ -122,6 +140,8 @@ export function getUserFollowing(email) {
 		})
 }
 
+// gets suggestions for a user
+// @param {Object} profile
 export function getSuggestionsForUser(profile) {
 	axios.get(`http://localhost:5100/api/user/suggestion/${profile.email}`)
 		.then(res => {

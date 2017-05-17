@@ -1,8 +1,15 @@
-// User actions
+/*
+* User actions
+* @methods - newLogin, populateDataSourceUser, loaderInit, foreignUserSearch, destroyProfile,
+*          followSuccess, unfollowSuccess, createPostIncrement, setProfileFollowers, setProfileFollowing,
+*          setSuggestions
+*/
 
 import * as types from '../constants/actions.constants';
 
 // action handler for toggling the loader
+// @param {Object} profile
+// @param {Object} dbData
 export function newLogin(profile, dbData) {
 	return {
 		type: 'LOGIN',
@@ -11,6 +18,7 @@ export function newLogin(profile, dbData) {
 }
 
 // action handler for populating the search user dataSource
+// @param {Object} users
 export function populateDataSourceUser(users) {
 	return {
 		type: 'POPULATE_DATA_SOURCE_USER',
@@ -18,6 +26,7 @@ export function populateDataSourceUser(users) {
 	};
 }
 
+// action handler for initialising loader
 export function loaderInit() {
 	return {
 		type: 'LOADER_INIT'
@@ -25,6 +34,7 @@ export function loaderInit() {
 }
 
 // action handler for storing not your profile
+// @param {Object} profile
 export function foreignUserSearch(profile) {
 	return {
 		type: 'FOREIGN_USER_SUCCESS',
@@ -40,6 +50,8 @@ export function destroyProfile() {
 }
 
 // action handler for modifying state on successful follow
+// @param {String} follower
+// @param {String} followee
 export function followSuccess(follower, followee) {
 	return {
 		type: 'FOLLOW_SUCCESS',
@@ -49,6 +61,8 @@ export function followSuccess(follower, followee) {
 }
 
 // action handler for modifying state on successful unfollow
+// @param {String} unfollower
+// @param {String} unfollowee
 export function unfollowSuccess(unfollower, unfollowee) {
 	return {
 		type: 'UNFOLLOW_SUCCESS',
@@ -64,7 +78,8 @@ export function createPostIncrement() {
 	};
 }
 
-// action handler for modifying state on successfull followering data fetch
+// action handler for modifying state on successfull followers data fetch
+// @param {Object} data
 export function setProfileFollowers(data) {
 	return {
 		type: 'SET_PROFILE_FOLLOWERS',
@@ -72,6 +87,8 @@ export function setProfileFollowers(data) {
 	};
 }
 
+// action handler for modifying state on successful following data fetch
+// @param {Object} data
 export function setProfileFollowing(data) {
 	return {
 		type: 'SET_PROFILE_FOLLOWING',
@@ -79,6 +96,8 @@ export function setProfileFollowing(data) {
 	}
 }
 
+// action handler for modifying state on successful suggestion data fetch
+// @param {Object} sugg
 export function setSuggestions(sugg) {
 	return {
 		type: 'SET_SUGGESTIONS_USER',

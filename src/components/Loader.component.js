@@ -1,4 +1,7 @@
-// Loader presentation component
+/*
+* Loader presentation component
+* @props - active
+*/
 
 import React, { Component } from 'react';
 

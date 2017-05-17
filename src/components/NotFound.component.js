@@ -1,4 +1,4 @@
-// Error Component: 404
+// Error Component
 
 import React, { Component } from 'react';
 

@@ -1,4 +1,7 @@
-// HTTP Accessible Functions
+/*
+* HTTP Accessor Methods
+* @methods - createPost, getSingleUserPosts, getOwnPosts, getSinglePost, getTimelinePosts
+*/
 
 import axios from 'axios';
 import { setNewPost, setOwnPosts, foreignUserPosts, setTimelinePosts } from '../actions/post.actions';
@@ -7,12 +10,13 @@ import store from '../store';
 
 
 // creates a new post
+// @param {String} postData
+// @param {Object} profile
 export function createPost(postData, profile) {
 
 	// handling requests for creating new profile
 	axios.post('http://localhost:5100/api/post/new', {profile: profile, data: postData})
 		.then(res => {
-			console.log(res.data);
 			store.dispatch(createPostIncrement());
 			getSinglePost(res.data._id);
 		})
@@ -22,6 +26,8 @@ export function createPost(postData, profile) {
 
 }
 
+// get user's personal posts
+// @param {String} email
 export function getSingleUserPosts(email) {
 	axios.get(`http://localhost:5100/api/post/own/${email}`)
 		.then(res => {
@@ -32,8 +38,9 @@ export function getSingleUserPosts(email) {
 		})
 }
 
-// fetches user's own posts
-export function getOwnPosts(email) {
+// get all own posts [not to be used for production in this version]
+// @param {String} email
+export function getAllPosts(email) {
 
 	// handling requests for fetching user's own posts
 	axios.get(`http://localhost:5100/api/find/post/all`)
@@ -45,7 +52,8 @@ export function getOwnPosts(email) {
 		});
 }
 
-// fetches a single post
+// get a single post
+// @param {String} postId
 export function getSinglePost(postId) {
 
 	// handling requests for fetching a single post
@@ -62,7 +70,8 @@ export function getSinglePost(postId) {
 		});
 }
 
-// fetches user's timeline posts
+// get user's timeline posts
+// @param {String} email
 export function getTimelinePosts(email) {
 
 	// handling requests for fetching user's timeline posts

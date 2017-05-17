@@ -1,4 +1,7 @@
-// App actions
+/*
+* App actions
+* @methods - loaderToggle, togglePostLoader, editorDisable
+*/
 
 import * as types from '../constants/actions.constants';
 
@@ -9,6 +12,8 @@ export function loaderToggle() {
 	};
 }
 
+// action handler for toggling post loader
+// @param {bool} toggle
 export function togglePostLoader(toggle) {
 	return {
 		type: 'POST_LOADER_TOGGLE',
@@ -16,6 +21,7 @@ export function togglePostLoader(toggle) {
 	};
 }
 
+// action handler for disabling editor while posting
 export function editorDisable() {
 	return {
 		type: 'EDITOR_DISABLED'

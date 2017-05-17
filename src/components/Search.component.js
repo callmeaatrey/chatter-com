@@ -1,4 +1,7 @@
-// Search presentation component
+/*
+* Search presentation component
+* @props - searchUser, dataSource
+*/
 
 import React, { Component } from 'react';
 import { Icon, Button, Input, AutoComplete } from 'antd';
@@ -11,10 +14,10 @@ function renderResult(user) {
 		<Option key={user._id} text={user.name}>
 			<Link to={`/profile/${user.email}`} style={{ color: 'black' }}>
 				<div className="row">
-					<div className="col-md-3">
+					<div className="col-md-3 col-lg-3 col-sm-3 col-xs-3">
 						<img className="img-circle-md" src={user.picture} />
 					</div>
-					<div className="col-md-9">
+					<div className="col-md-9 col-lg-9 col-sm-9 col-xs-9">
 						<div className="search-user">
 							<span className="search-user-name">{user.name}</span>
 							<span className="search-user-nickname">{user.nickname}</span>

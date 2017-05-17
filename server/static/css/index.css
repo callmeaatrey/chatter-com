@@ -5,21 +5,35 @@
 
 /*
 * Table of Contents
-* 1. Skeleton (16)
-* 2. Login (24)
-* 3. Social Button (63)
-* 3. Home (76)
-* 4. Profile (80)
-* 5. Media Queries (84)
+* 1. General (22)
+* 2. Login (38)
+* 	2.1 Social Button (75)
+* 3. Home (90)
+* 	3.1 Loader (102)
+* 	3.2 Editor (155)
+* 	3.3 Search (174)
+* 	3.4 Post (206)
+* 	3.5 Suggestion (219)
+* 4. Profile (234)
+* 	4.1 Followering (299)
+* 5. Media Queries (315)
  */
 
-/* Skeleton */
+/* <General> */
 
-.skeleton {
-
+.no-right-padding {
+	padding-right: 0px;
 }
 
-/* </Skeleton> */
+.no-left-padding {
+	padding-left: 0px;
+}
+
+.search-bar-main {
+	display: inline;
+}
+
+/* </General> */
 
 /* <Login> */
 
@@ -69,7 +83,7 @@
 	    height: auto;
 	}
 
-	/* </Social Buttons> */
+	/* </Social Button> */
 
 /* </Login> */
 
@@ -202,6 +216,19 @@
 
 	/* </Post> */
 
+	/* <Suggestion> */
+
+	.suggestion-picture {
+		top: 0%;
+	}
+
+	.suggestion-name {
+		font-size: 1.2em;
+		font-weight: 700;
+	}
+
+	/* </Suggestion> */
+
 /* </Home> */
 
 /* <Profile> */
@@ -215,8 +242,8 @@
 	border-radius: 50%;
     height: 100px;
     position: relative;
-    margin: 0 auto;
-    top: 2em;
+    left: 50%;
+    transform: translate(-50%, 25%);
 }
 
 .profile-pic {
@@ -255,10 +282,25 @@
     text-align: center;
 }
 
+.profile-details-container {
+	padding: 0 10px !important;
+}
+
+.meta {
+	position: relative;
+	left: 0%;
+}
+
+.meta-center {
+	position: relative;
+	left: 0%;
+}
+
 	/* <Followering> */
 
 	.followering-picture {
 		top: 0%;
+		transform: translate(50%, 0%);
 	}
 
 	.followering-name {
@@ -267,33 +309,42 @@
 
 	/* </Followering */
 
-	/* <Suggestion> */
-
-	.suggestion-picture {
-		top: 0%;
-	}
-
-	.suggestion-name {
-		font-size: 1.2em;
-    	font-weight: 700;
-	}
-
-
-	/* </Suggestion> */
-
 /* </Profile> */
 
 /* <Media queries> */
 
 /* For 'sm' and 'xs' resolutions */
-@media screen and (max-width:991px){
+@media screen and (max-width: 991px){
     .login-left {
     	border-right: none;
     	padding-bottom: 1em;
     	margin-bottom: 1em;
     	border-bottom: 1px solid lightgrey;
     }
+
+    .fixed-sider {
+    	width: 20%;
+    }
 }
 
+/* For 'xs' resolutions */
+@media screen and (max-width: 767px) {
+	.fixed-sider {
+		position: relative;
+		margin-bottom: 2em;
+		width: 100%;
+	}
+
+	.meta-center {
+		position: relative;
+		left: 50%;
+	}
+}
+
+@media screen and (max-width: 580px) {
+	.search-bar-main {
+		display: none;
+	}
+}
 /* </Media Queries> */
 
