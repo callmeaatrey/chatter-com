@@ -67,7 +67,6 @@ router.get('/', function(req, res) {
 // route for handling user queries
 router.route('/user/:email')
 	.get(function(req, res) {
-		console.log(req.params);
 		User.findOne({email: req.params.email}, function(err, doc) {
 			if (err) {
 				res.send(err);
@@ -90,7 +89,6 @@ router.route('/register/google')
 			if(err) {
 				res.send(err);
 			} else {
-				console.log(res);
 				res.json({ message: 'User successfully added!' });
 			}
 		});
@@ -99,7 +97,6 @@ router.route('/register/google')
 // adding new posts
 router.route('/post/new')
 	.post(function(req, res) {
-		console.log(res.body);
 		var post = new Post();
 		post.meta.nickname = req.body.profile.nickname;
 		post.meta.email = req.body.profile.email;
@@ -121,7 +118,6 @@ router.route('/post/new')
 					if(err) {
 						res.send(err);
 					} else {
-						console.log('updated');
 					}
 				});
 				res.json({ message: 'Post successfully added!', _id: post._id});
@@ -136,7 +132,6 @@ router.route('/post/own/:email')
 			if(err) {
 				res.send(err);
 			} else {
-				console.log('docs' + docs);
 				res.json(docs);
 			}
 		});
@@ -162,7 +157,6 @@ router.route('/post/timeline/:email')
 
 			// for populating the people array
 			people.push.apply(people, doc.following);
-			console.log(people);
 			Post.find({'meta.email': { $in: people }}).sort({'meta.date': -1}).find(function(err, docs) {
 				if(err) {
 					res.send(err);

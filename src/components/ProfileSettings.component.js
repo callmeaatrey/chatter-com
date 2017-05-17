@@ -22,7 +22,6 @@ class Settings extends Component {
 				    message: 'Hooray!',
 				    description: 'Your password is successfully changed!',
 				});
-				console.log('Form values are: ', values);
 				this.props.setPassword(values.password, this.props.email);
 				this.props.form.resetFields();
 			}

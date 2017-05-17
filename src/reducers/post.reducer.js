@@ -11,7 +11,6 @@ const initialPostState = {
 const postReducer = function(state=initialPostState, action) {
 	switch(action.type) {
 		case types.NEW_POST:
-			console.log(action.post);
 			var post = state.posts;
 			post.unshift(action.post);
 			return Object.assign({}, state, {

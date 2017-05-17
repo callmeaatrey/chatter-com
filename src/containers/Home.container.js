@@ -34,7 +34,7 @@ class HomeContainer extends Component {
  				getSuggestionsForUser(profile);
  				clearTimeout(timeout);
  			} else {
- 				console.log('still waiting!');
+ 				// console.log('waiting for the profile!');
  			}
  		}, 1000);
 
@@ -58,7 +58,6 @@ class HomeContainer extends Component {
 
 	render() {
 		var { app, user, auth, post } = this.props;
-		console.log(user.suggestions);
 		return (
 			<Home
 				email={user.email}

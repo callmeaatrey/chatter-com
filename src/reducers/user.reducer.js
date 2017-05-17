@@ -24,7 +24,6 @@ const userReducer = function(state=initialUserState, action) {
 			});
 
 		case types.POPULATE_DATA_SOURCE_USER:
-			console.log(action.users);
 			return Object.assign({}, state, {
 				searchDataSource: action.users
 			});
@@ -113,7 +112,6 @@ const userReducer = function(state=initialUserState, action) {
 			});
 
 		case types.SET_PROFILE_FOLLOWERS:
-			console.log(action.followers);
 			return Object.assign({}, state, {
 				followersProfiles: action.followers
 			});

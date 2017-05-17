@@ -22,7 +22,7 @@ const { Header, Content, Footer, Sider } = Layout;
 class Home extends Component {
 
 	handleChange(val) {
-		console.log(val);
+		// console.log(val);
 	}
 
 	sendEditorData(e) {
@@ -30,7 +30,6 @@ class Home extends Component {
 	}
 
 	render() {
-		console.log(this.props.followers);
 		return (
 			<div className="home-wrapper">
 				<Loader active={this.props.loader} />

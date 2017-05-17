@@ -30,7 +30,7 @@ function renderResult(user) {
 }
 
 function onSelect(user) {
-	console.log(user);
+	// console.log(user);
 }
 
 class Search extends Component {

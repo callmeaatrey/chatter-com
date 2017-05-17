@@ -28,7 +28,7 @@ class ProfileContainer extends Component {
  				getUserFollowing(props.params.email);
  				clearTimeout(timeout);
  			} else {
- 				console.log('still waiting!');
+ 				// console.log('still waiting for the profile!');
  			}
  		}, 1000);
 
@@ -37,7 +37,6 @@ class ProfileContainer extends Component {
 
  	componentWillReceiveProps(nextProps) {
  		if(nextProps.params.email !== this.props.params.email) {
- 			console.log('new props came');
  			store.dispatch(loaderInit());
  			getNewUserProfile(nextProps.params.email);
  			getSingleUserPosts(nextProps.params.email);
