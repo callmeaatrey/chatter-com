@@ -163,7 +163,7 @@ router.route('/post/timeline/:email')
 			// for populating the people array
 			people.push.apply(people, doc.following);
 			console.log(people);
-			Post.find({'meta.email': { $in: people }}, function(err, docs) {
+			Post.find({'meta.email': { $in: people }}).sort({'meta.date': -1}).find(function(err, docs) {
 				if(err) {
 					res.send(err);
 				} else {

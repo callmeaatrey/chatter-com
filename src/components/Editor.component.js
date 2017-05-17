@@ -31,22 +31,27 @@ class Editor extends Component {
 
 	// for handling press ENTER posting
 	enterSubmit(e) {
-		console.log(e.target.value);
-		store.dispatch(editorDisable());
-		this.props.sendEditorData(e.target.value);
-		e.target.value = '';
-		document.getElementById('chars-remaining').innerHTML = '140 characters remaining';
-		store.dispatch(togglePostLoader(false));
+		var trimmedTextAreaValue = e.target.value.replace(/\s/g, '');
+		if(trimmedTextAreaValue.length > 0) {
+			store.dispatch(editorDisable());
+			this.props.sendEditorData(e.target.value.trim());
+			e.target.value = '';
+			document.getElementById('chars-remaining').innerHTML = '140 characters remaining';
+			store.dispatch(togglePostLoader(false));
+		}
 	}
 
 	// for handling click posting
 	clickSubmit() {
 		var textarea = document.getElementsByTagName('textarea')[0];
-		store.dispatch(editorDisable());
-		this.props.sendEditorData(textarea.value);
-		textarea.value = '';
-		document.getElementById('chars-remaining').innerHTML = '140 characters remaining';
-		store.dispatch(togglePostLoader(false));
+		var trimmedTextAreaValue = textarea.value.replace(/\s/g, '');
+		if(trimmedTextAreaValue.length > 0) {
+			store.dispatch(editorDisable());
+			this.props.sendEditorData(textarea.value.trim());
+			textarea.value = '';
+			document.getElementById('chars-remaining').innerHTML = '140 characters remaining';
+			store.dispatch(togglePostLoader(false));
+		}
 	}
 
 	render() {

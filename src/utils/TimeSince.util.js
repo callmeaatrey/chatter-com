@@ -31,5 +31,5 @@ export default function TimeSince(date) {
 		return interval + " minutes ago";
 	}
 
-	return "Just posted now";
+	return "Just now";
 }
