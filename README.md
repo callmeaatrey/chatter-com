@@ -1,4 +1,4 @@
-# Cleopatra
+# ChatterCom
 
 A social broadcasting platform.
 
@@ -15,7 +15,19 @@ npm install
 
 Also, you need an instance of MongoDB running locally on port 27017.
 
-To start the server, execute the command:
+To start the primary daemon process for MongoDB, execute the following commands:
+```
+export PATH=`<mongodb-install-directory>`/bin:$PATH
+// skip sudo if read-write access control is unrestricted for chatter-com
+sudo mongod
+```
+
+Open another terminal if you want to start the mongo shell and execute the command:
+```
+mongo chatter-com
+```
+
+To start the application only if you installed the dependancies and successfully connected to the DB, execute the command:
 
 ```
 npm run both
@@ -35,5 +47,8 @@ The user interface of the application is derived based on the following mockups:
 
 ## Authors
 
-* **Shikher Aatrey**
+* **Shikher Aatrey (itsaatrey@gmail.com)**
 
+## Contact
+
+* Feel free to reach me if you have trouble with the application on my email.
