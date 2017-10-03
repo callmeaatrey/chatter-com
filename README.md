@@ -52,3 +52,7 @@ The user interface of the application is derived based on the following mockups:
 ## Contact
 
 * Feel free to reach me if you have trouble with the application on my email.
+
+## Credits
+
+* Vishal Gowda (@farthVader91)
